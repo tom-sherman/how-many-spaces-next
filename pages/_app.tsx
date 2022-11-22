@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate>
+      <Hydrate state={pageProps.dehydratedState}>
         <AppWrapper>
           <GlobalStyle />
           <PageContainer>

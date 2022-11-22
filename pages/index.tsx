@@ -45,7 +45,7 @@ export default function Home() {
   const [selectedSort, setSelectedSort] = useState<CarParkSortParameters>(CarParkSortParameters.SPACES_DESC);
 
   const listQuery = useQuery({
-    queryKey: ['car-park-list', LOCATION, selectedCategory],
+    queryKey: ['car-park-list', LOCATION, selectedCategory, selectedSort],
     refetchInterval: 60000,
     queryFn: () => getCarParkList(LOCATION, selectedCategory, selectedSort),
   });

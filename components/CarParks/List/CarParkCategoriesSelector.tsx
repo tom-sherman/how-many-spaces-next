@@ -51,6 +51,7 @@ const CategoryItem = styled.button<CategoryItemProps>`
         left: 0;
         width: 100%;
         height: ${props => props.selected ? '3px' : 0};
+        opacity: ${props => props.selected ? 1 : 0};
         background-color: var(--colour-blue);
         content: '';
     }
