@@ -58,7 +58,9 @@ const CategoryItem = styled.button<CategoryItemProps>`
 
     @media (min-width: ${BreakpointValues.ts}) {
         padding-top: 0;
+        padding-bottom: 14px;
         margin-right: 10px;
+        font-size: 18px;
 
         &::after {
             display: block;

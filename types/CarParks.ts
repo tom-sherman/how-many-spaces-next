@@ -35,6 +35,8 @@ export type CarPark = {
     availability: number,
     isBusy: boolean,
     isFull: boolean,
+    isClosed: boolean,
     isClosingSoon: boolean,
+    currentOpeningHours: string,
     lastUpdated: number,
 }

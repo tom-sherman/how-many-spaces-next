@@ -1,12 +1,15 @@
 import { getCarParkList } from '@/actions/car-parks';
 import CarParkList from '@/components/CarParks/List/CarParkList';
+import ErrorBanner from '@/components/Core/Errors/ErrorBanner';
 import Header from '@/components/Core/Header/Header'
+import LoadingOverlay from '@/components/Core/Utilities/LoadingOverlay';
 import BreakpointValues from '@/styles/breakpoints';
 import { Columns, SiteWidth } from '@/styles/layout';
-import { ListResponse } from '@/types/API';
 import { CarParkCategories, CarParkLocations, CarParkSortParameters } from '@/types/CarParks';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head'
+import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
 
@@ -29,15 +32,40 @@ const HomepageBody = styled.div`
 `
 
 const CarParkListOuter = styled.div`
-    background-color: white;
-    grid-column: 1 / 13;
-    padding: 20px;
-    border-radius: 15px;
+  position: relative;
+  background-color: white;
+  grid-column: 1 / 13;
+  padding: 20px;
+  border-radius: 15px;
+  min-height: 500px;
+  margin-bottom: 20px;
+  overflow: hidden;
 
-    @media (min-width: ${BreakpointValues.tl}) {
-        padding: 24px 20px;
-        grid-column: 1 / 9;
-    }
+  @media (min-width: ${BreakpointValues.ds}) {
+      grid-column: 1 / 9;
+  }
+`
+
+const SidebarOuter = styled.div`
+  position: relative;
+  background-color: white;
+  grid-column: 1 / 13;
+  padding: 20px;
+  border-radius: 15px;
+  min-height: 500px;
+  margin-bottom: 20px;
+  overflow: hidden;
+
+  @media (min-width: ${BreakpointValues.ds}) {
+      grid-column: 9 / 13;
+  }
+`
+
+const Sponsor = styled.div`
+  background-color: var(--colour-blue--lightest);
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-top: 2px;
 `
 
 export default function Home() {
@@ -47,6 +75,8 @@ export default function Home() {
   const listQuery = useQuery({
     queryKey: ['car-park-list', LOCATION, selectedCategory, selectedSort],
     refetchInterval: 60000,
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
     queryFn: () => getCarParkList(LOCATION, selectedCategory, selectedSort),
   });
 
@@ -64,12 +94,21 @@ export default function Home() {
             <SiteWidth>
               <Columns>
                 <CarParkListOuter>
+                  { listQuery.isLoading ? <LoadingOverlay message='Refreshing car park data' /> : null }
                   {
-                    listQuery.isSuccess ? (
-                      <CarParkList data={listQuery.data} onCategoryChange={setSelectedCategory} />
-                    ) : null
+                    listQuery.isError ? (
+                      <ErrorBanner title='Unable to fetch car parks' message='Unfortunately we encountered an issue fetching the car parks in this city, please check back shortly. If the problem persists please use the **Report an issue** form to get in touch with us.' />
+                    ) : (
+                      listQuery.data ? <CarParkList data={listQuery.data} onCategoryChange={setSelectedCategory} onSortChange={setSelectedSort} /> : null
+                    )
                   }
                 </CarParkListOuter>
+                <SidebarOuter>
+                  <Sponsor>
+                    <h2>Sponsor this page</h2>
+                    <p>Are you interested in placing an ad or logo on this page? Please head to our <Link href="/sponsor">sponsorship information page</Link> to find out how.</p>
+                  </Sponsor>
+                </SidebarOuter>
               </Columns>
             </SiteWidth>
           </HomepageBody>
@@ -78,7 +117,7 @@ export default function Home() {
   )
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(
@@ -86,9 +125,14 @@ export async function getServerSideProps() {
     () => getCarParkList(LOCATION, CarParkCategories.ALL, CarParkSortParameters.SPACES_DESC)
   );
 
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, state-while-revalidate=60'
+  );
+
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-    }
+    },
   }
 }

@@ -14,13 +14,24 @@ export const handlers = [
             ctx.json<ListResponse>({
                 categories: defaultCategories,
                 category: <CarParkCategories>params.get('category') ?? CarParkCategories.ALL,
-                sort: CarParkSortParameters.SPACES_DESC,
+                sort: <CarParkSortParameters>params.get('sort') ?? CarParkSortParameters.SPACES_DESC,
                 carParks: defaultCarParks
                     .filter(carPark => {
                         if (params.get('category') === CarParkCategories.ALL) {
                             return true;
                         }
                         return carPark.category === params.get('category');
+                    })
+                    .sort((a, b) => {
+                        if (params.get('sort') === CarParkSortParameters.CITY_CENTRE_DISTANCE_DESC) {
+                            return a.distanceFromCityCentre - b.distanceFromCityCentre;
+                        }
+
+                        if (params.get('sort') === CarParkSortParameters.TRAIN_STATION_DISTANCE_DESC) {
+                            return a.distanceFromTrainStation - b.distanceFromTrainStation;
+                        }
+
+                        return b.availableSpaces - a.availableSpaces;
                     }),
             })
         )

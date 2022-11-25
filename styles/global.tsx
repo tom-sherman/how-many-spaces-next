@@ -6,13 +6,17 @@ const GlobalStyle = createGlobalStyle`
         --colour-blue: #383DFA;
         --colour-blue--dark: #0A0450;
         --colour-blue--lightest: #F5F4FE;
-        --colour-green: #58AE44;
-        --colour-green--light: #7DCE6A;
-        --colour-orange: #CD8338;
-        --colour-orange--light: #E3AB6E;
-        --colour-red: #CD3838;
-        --colour-red--light: #E57979;
+        --colour-green: #3B8433;
+        --colour-green--light: #8fec7a;
+        --colour-green--lightest: #cef7c5;
+        --colour-orange: #A36629;
+        --colour-orange--light: #f3bd84;
+        --colour-orange--lightest: #F4E6D6;
+        --colour-red: #a42b2b;
+        --colour-red--light: #f7b4b4;
+        --colour-red--lightest: #FFD1D1;
         --colour-grey: #686868;
+        --colour-grey--light: #E5E2E2;
         --colour-grey--lighter: #DBDBDB;
         --colour-grey--lightest: #FAFAFA;
 
@@ -48,6 +52,14 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Secular One', sans-serif;
     }
 
+    h2 {
+        font-weight: 600;
+        font-size: 24px;
+        color: var(--colour-black);
+        line-height: 1.1;
+        margin: 0 0 6px;
+    }
+
     /* For images to not be able to exceed their container */
     img {
         max-width: 100%;
@@ -72,6 +84,20 @@ const GlobalStyle = createGlobalStyle`
     meter {
         -webkit-appearance: revert;
         appearance: revert;
+    }
+
+    strong {
+        font-weight: bold;
+    }
+
+    p {
+        a {
+            text-decoration: underline;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
     }
 
     /* reset default text opacity of input placeholder */

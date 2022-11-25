@@ -74,9 +74,12 @@ const TopLeft = styled.div`
     grid-column: 1 / 10;
 
     @media (min-width: ${breakpoints.ts}) {
+        grid-column: 1 / 6;
+    }
+
+    @media (min-width: ${breakpoints.ds}) {
         flex-direction: row;
         align-items: flex-end;
-        grid-column: 1 / 6;
     }
 `
 
@@ -105,6 +108,7 @@ const Left = styled.div`
     }
 
     @media (min-width: ${breakpoints.tl}) {
+        margin-bottom: 24px;
         grid-column: 1 / 9;
 
         p {
@@ -141,13 +145,15 @@ const LogoLocation = styled.span`
     font-weight: 200;
 
     @media (min-width: ${breakpoints.ts}) {
-        margin: 0 16px 5px;
         font-size: 22px;
     }
     
     @media (min-width: ${breakpoints.tl}) {
-        margin: 0 16px 8px;
         font-size: 22px;
+    }
+
+    @media (min-width: ${breakpoints.ds}) {
+        margin: 0 16px 5px;
     }
 `
 
