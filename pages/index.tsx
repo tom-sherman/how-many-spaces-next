@@ -94,7 +94,7 @@ export default function Home() {
             <SiteWidth>
               <Columns>
                 <CarParkListOuter>
-                  { listQuery.isLoading ? <LoadingOverlay message='Refreshing car park data' /> : null }
+                  { listQuery.isLoading || listQuery.isFetching ? <LoadingOverlay message='Refreshing car park data' /> : null }
                   {
                     listQuery.isError ? (
                       <ErrorBanner title='Unable to fetch car parks' message='Unfortunately we encountered an issue fetching the car parks in this city, please check back shortly. If the problem persists please use the **Report an issue** form to get in touch with us.' />
@@ -106,7 +106,7 @@ export default function Home() {
                 <SidebarOuter>
                   <Sponsor>
                     <h2>Sponsor this page</h2>
-                    <p>Are you interested in placing an ad or logo on this page? Please head to our <Link href="/sponsor">sponsorship information page</Link> to find out how.</p>
+                    <p>Are you interested in placing an ad or logo on this page? Head over to our <Link href="/sponsor">sponsorship information page</Link> to find out how.</p>
                   </Sponsor>
                 </SidebarOuter>
               </Columns>

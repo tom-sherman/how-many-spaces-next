@@ -7,7 +7,6 @@ const Container = styled.div`
     display: block;
     background-color: var(--colour-red--light);
     border-left: 5px solid var(--colour-red);
-    color: white;
     padding: 20px;
 `
 

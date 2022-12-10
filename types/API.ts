@@ -18,5 +18,5 @@ export interface ListResponse {
     categories: CategoryResponse[],
     category: CarParkCategories,
     sort: CarParkSortParameters,
-    carParks: CarPark[],
+    data: CarPark[],
 }

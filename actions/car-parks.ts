@@ -11,7 +11,7 @@ export async function getCarParkList(
     category: CarParkCategories,
     sort: CarParkSortParameters
 ): Promise<ListResponse> {
-    return axios.get(`${BASE_URL}/${CAR_PARKS_ENDPOINT}/${location}`, {
+    return axios.get(`${BASE_URL}/${CAR_PARKS_ENDPOINT}/location/${location}`, {
         params: {
             category,
             sort

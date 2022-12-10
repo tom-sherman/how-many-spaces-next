@@ -47,7 +47,7 @@ export default function CarParkList(props: CarParkListProps) {
             </Top>
             <List>
                 {
-                    data.carParks.map(carPark => <CarPark key={carPark.url} carPark={carPark} />)
+                    data?.data.map(carPark => <CarPark key={carPark.url} carPark={carPark} />)
                 }
             </List>
         </>

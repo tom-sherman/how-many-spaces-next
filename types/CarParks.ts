@@ -1,5 +1,5 @@
 export enum CarParkLocations {
-    NORWICH = 'Norwich'
+    NORWICH = 'norwich'
 }
 
 export enum CarParkCategories {

@@ -11,6 +11,7 @@ export const handlers = [
     rest.get(`${BASE_URL}/car-parks/:location`, (_req, res, ctx) => {
         const params = <URLSearchParams> _req.url.searchParams;
         return res(
+            ctx.delay(2000),
             ctx.json<ListResponse>({
                 categories: defaultCategories,
                 category: <CarParkCategories>params.get('category') ?? CarParkCategories.ALL,
