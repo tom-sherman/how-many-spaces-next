@@ -1,3 +1,4 @@
+import { useAppContext } from "@/context/app"
 import BreakpointValues from "@/styles/breakpoints"
 import { ButtonNavItem, Nav, NavItem } from "@/styles/components/Navigation"
 import { SiteWidth } from "@/styles/layout"
@@ -81,6 +82,8 @@ const FooterNav = styled(Nav)`
 
 export default function Footer() {
     const time = new Date();
+
+    const context = useAppContext();
 
     return (
         <Outer>

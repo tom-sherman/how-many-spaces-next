@@ -37,8 +37,9 @@ type TitleProps = {
 
 export const Title = styled.div<TitleProps>`
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
     margin-bottom: 10px;
 
     h2 {
@@ -54,6 +55,13 @@ export const Title = styled.div<TitleProps>`
             font-size: 1.75rem;
         }
     }
+`
+
+export const TitleMain = styled.div`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
 `
 
 export const Tags = styled.div`

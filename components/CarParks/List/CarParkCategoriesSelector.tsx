@@ -1,12 +1,14 @@
+import CustomSelect from "@/components/Core/Utilities/Fields/ReactSelect"
 import BreakpointValues from "@/styles/breakpoints"
 import { CategoryResponse } from "@/types/API"
 import { CarParkCategories } from "@/types/CarParks"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import styled from "styled-components"
 
 type CarParkCategoriesProps = {
     category: CarParkCategories,
     categories: CategoryResponse[],
+    visibleCategories: CarParkCategories[],
     onSelect: Function,
 }
 
@@ -19,10 +21,11 @@ const MobileDisplay = styled.button`
 `
 
 const CategoriesList = styled.div`
-    display: flex;
+    display: none;
     flex-direction: column;
 
     @media (min-width: ${BreakpointValues.ts}) {
+        display: flex;
         flex-direction: row;
     }
 `
@@ -68,23 +71,46 @@ const CategoryItem = styled.button<CategoryItemProps>`
     }
 `;
 
+type OptionType = { [value: string]: any }
+type OptionsType = Array<OptionType>
+
 export default function CarParkCategoriesSelector(props: CarParkCategoriesProps) {
-    const [mobileIsOpen, setMobileIsOpen] = useState(false);
+    const optionsForSelect = useMemo<OptionsType>(() => {
+        return props.visibleCategories
+            .map<CategoryResponse|undefined>(category => props.categories.find(searchCategory => searchCategory.category === category))
+            .map(option => {
+                const value = option?.category
+                let label = option?.name;
+                return {
+                    value,
+                    label
+                };
+            })
+    }, props.visibleCategories);
 
     return (
-        <div>
-            <MobileDisplay>
-                <span>{ props.categories.find(value => value.category === props.category)?.name }</span>
-            </MobileDisplay>
-            <CategoriesList>
-                {
-                    props.categories.map(category => (
-                        <CategoryItem key={category.category} selected={category.category === props.category} onClick={() => props.onSelect(category.category)}>
-                            { category.name }
+        <>
+        <MobileDisplay>
+            <CustomSelect
+                id="car_park_category_select"
+                defaultValue={{ value: 'SPACES_DESC', label: 'Most spaces' }}
+                value={optionsForSelect.filter(({ value }) => value === props.category)}
+                options={optionsForSelect}
+                onChange={(newValue) => props.onSelect(newValue?.value)}
+            />
+        </MobileDisplay>
+        <CategoriesList>
+            {
+                props.visibleCategories
+                    .map<CategoryResponse|undefined>(category => props.categories.find(searchCategory => searchCategory.category === category))
+                    .filter(value => !!value)
+                    .map(category => (
+                        <CategoryItem key={category?.category} selected={category?.category === props.category} onClick={() => props.onSelect(category?.category)}>
+                            { category?.name }
                         </CategoryItem>
-                    ))
-                }
-            </CategoriesList>
-        </div>
+                ))
+            }
+        </CategoriesList>
+        </>
     )
 }

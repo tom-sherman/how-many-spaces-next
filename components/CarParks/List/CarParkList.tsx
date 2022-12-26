@@ -1,15 +1,19 @@
-import { CarParkSortParameters } from "@/types/CarParks";
+import { CarPark as CarParkContract, CarParkCategories, CarParkSortParameters } from "@/types/CarParks";
 import styled from "styled-components";
 import CarParkCategoriesSelector from "./CarParkCategoriesSelector";
 import CarPark from '../CarPark';
 import { ListResponse } from "@/types/API";
 import CarParkSortSelector from "./CarParkSortSelector";
+import BreakpointValues from "@/styles/breakpoints";
 
 const Top = styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
     border-bottom: 1px solid var(--colour-grey--lighter);
+
+    @media (min-width: ${BreakpointValues.ts}) {
+        align-items: baseline;
+    }
 `
 
 const List = styled.div`
@@ -37,6 +41,7 @@ export default function CarParkList(props: CarParkListProps) {
                 <CarParkCategoriesSelector
                     category={data.category}
                     categories={data.categories}
+                    visibleCategories={[CarParkCategories.CAR_PARK, CarParkCategories.PARK_AND_RIDE, CarParkCategories.ALL]}
                     onSelect={onCategoryChange}
                 />
                 <CarParkSortSelector
@@ -47,7 +52,7 @@ export default function CarParkList(props: CarParkListProps) {
             </Top>
             <List>
                 {
-                    data?.data.map(carPark => <CarPark key={carPark.url} carPark={carPark} />)
+                    data.data.map(carPark => <CarPark key={carPark.url} carPark={carPark} />)
                 }
             </List>
         </>

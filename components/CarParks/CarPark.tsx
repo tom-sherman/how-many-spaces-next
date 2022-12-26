@@ -7,9 +7,18 @@ import Tag from "../Core/Utilities/Tag";
 import MetaItem from "./Elements/MetaItem";
 import ButtonStyles from "@/styles/components/Utilities/Button";
 import styled from "styled-components";
+import { formatDistance } from "date-fns";
+import { useEffect, useMemo, useState } from "react";
+import BreakpointValues from "@/styles/breakpoints";
 
 const DetailsButton = styled.span`
-    ${ButtonStyles}
+    ${ButtonStyles};
+    display: none;
+    white-space: nowrap;
+
+    @media (min-width: ${BreakpointValues.ts}) {
+        display: block;
+    }
 `
 
 type CarParkProps = {
@@ -21,6 +30,27 @@ export default function CarPark(props: CarParkProps) {
         carPark
     } = props;
 
+    const timeAgo = useMemo(() => {
+        return formatDistance(
+            new Date(carPark.lastUpdated * 1000),
+            new Date(),
+            {
+                includeSeconds: true,
+                addSuffix: true
+            }
+        );
+    }, [carPark.lastUpdated]);
+
+    const [updatedAtDistance, setUpdatedAtDistance] = useState<string>(timeAgo);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setUpdatedAtDistance(timeAgo);
+        }, 1000)
+
+        return () => clearInterval(interval);
+    }, [carPark.lastUpdated])
+
     return (
         <Styles.CarParkPreview href={carPark.url} title={carPark.name}>
             <SpacesIndicator
@@ -31,23 +61,23 @@ export default function CarPark(props: CarParkProps) {
             />
             <Styles.CarParkPreviewContent>
                 <Styles.Title isClosed={carPark.isClosed}>
-                    <h2>{ carPark.name }{ carPark.category === CarParkCategories.PARK_AND_RIDE ? <FontAwesomeIcon icon={faBus} style={{ marginLeft: '10px' }} title="Park & ride car park" /> : null }</h2>
-                    <Styles.Tags>
-                        { carPark.isFull ? <Tag label="Full" isError /> : null }
-                        { carPark.isBusy ? <Tag label="Busy" isWarning /> : null }
-                        { carPark.isClosingSoon ? <Tag label="Closing soon" isWarning icon={faClock} /> : null }
-                        { carPark.isClosed ? <Tag label={`Closed`} isNeutral /> : null }
-                    </Styles.Tags>
+                    <Styles.TitleMain>
+                        <h2>{ carPark.name }{ carPark.category === CarParkCategories.PARK_AND_RIDE ? <FontAwesomeIcon icon={faBus} style={{ marginLeft: '10px' }} title="Park & ride car park" /> : null }</h2>
+                        <Styles.Tags>
+                            { carPark.isFull ? <Tag label="Full" isError /> : null }
+                            { carPark.isBusy ? <Tag label="Busy" isWarning /> : null }
+                            { carPark.isClosingSoon ? <Tag label="Closing soon" isWarning icon={faClock} /> : null }
+                            { carPark.isClosed ? <Tag label={`Closed`} isNeutral /> : null }
+                        </Styles.Tags>
+                    </Styles.TitleMain>
+                    <DetailsButton>More details</DetailsButton>
                 </Styles.Title>
                 <Styles.Bottom>
                     <Styles.MetaItems>
                         <MetaItem icon={faLocationDot} label={carPark.shortAddress} />
-                        <MetaItem icon={faParking} label={`${carPark.totalSpaces.toString()} spaces`} />
-                        <MetaItem icon={faClock} label={carPark.currentOpeningHours} />
+                        <MetaItem icon={faParking} label={`${carPark.totalSpaces.toString()} total spaces`} />
+                        <MetaItem icon={faClock} label={updatedAtDistance} />
                     </Styles.MetaItems>
-                    <Styles.Actions>
-                        <DetailsButton>More details</DetailsButton>
-                    </Styles.Actions>
                 </Styles.Bottom>
             </Styles.CarParkPreviewContent>
         </Styles.CarParkPreview>

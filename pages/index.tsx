@@ -4,7 +4,7 @@ import ErrorBanner from '@/components/Core/Errors/ErrorBanner';
 import Header from '@/components/Core/Header/Header'
 import LoadingOverlay from '@/components/Core/Utilities/LoadingOverlay';
 import BreakpointValues from '@/styles/breakpoints';
-import { Columns, SiteWidth } from '@/styles/layout';
+import { Columns, PageBody, SiteWidth } from '@/styles/layout';
 import { CarParkCategories, CarParkLocations, CarParkSortParameters } from '@/types/CarParks';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
@@ -14,12 +14,6 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 const LOCATION = CarParkLocations.NORWICH;
-
-const PageBody = styled.div`
-  position: relative;
-  z-index: 1;
-  flex-grow: 1;
-`;
 
 const HomepageBody = styled.div`
   display: block;
@@ -69,7 +63,7 @@ const Sponsor = styled.div`
 `
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState<CarParkCategories>(CarParkCategories.ALL);
+  const [selectedCategory, setSelectedCategory] = useState<CarParkCategories>(CarParkCategories.CAR_PARK);
   const [selectedSort, setSelectedSort] = useState<CarParkSortParameters>(CarParkSortParameters.SPACES_DESC);
 
   const listQuery = useQuery({
@@ -94,7 +88,7 @@ export default function Home() {
             <SiteWidth>
               <Columns>
                 <CarParkListOuter>
-                  { listQuery.isLoading || listQuery.isFetching ? <LoadingOverlay message='Refreshing car park data' /> : null }
+                  { listQuery.isLoading ? <LoadingOverlay message='Refreshing car park data' /> : null }
                   {
                     listQuery.isError ? (
                       <ErrorBanner title='Unable to fetch car parks' message='Unfortunately we encountered an issue fetching the car parks in this city, please check back shortly. If the problem persists please use the **Report an issue** form to get in touch with us.' />
@@ -121,8 +115,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(
-    ['car-park-list', LOCATION, CarParkCategories.ALL, CarParkSortParameters.SPACES_DESC],
-    () => getCarParkList(LOCATION, CarParkCategories.ALL, CarParkSortParameters.SPACES_DESC)
+    ['car-park-list', LOCATION, CarParkCategories.CAR_PARK, CarParkSortParameters.SPACES_DESC],
+    () => getCarParkList(LOCATION, CarParkCategories.CAR_PARK, CarParkSortParameters.SPACES_DESC)
   );
 
   res.setHeader(

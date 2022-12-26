@@ -12,3 +12,8 @@ export const Columns = styled.div`
     grid-gap: 20px;
     width: 100%;
 `
+
+export const PageBody = styled.div`
+  position: relative;
+  flex-grow: 1;
+`;

@@ -183,11 +183,13 @@ const DesktopNav = styled(Nav)`
 `
 
 type HeaderProps = {
+    h1?: string,
     leftContent: React.ReactNode
 }
 
 export default function Header(props: HeaderProps) {
     const {
+        h1,
         leftContent
     } = props;
 
@@ -227,6 +229,9 @@ export default function Header(props: HeaderProps) {
                         </TopRight>
                     </Top>
                     <Left>
+                        {
+                            h1 ? <h1>{h1}</h1> : null
+                        }
                         { leftContent }
                     </Left>
                 </Inner>
