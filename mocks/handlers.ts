@@ -1,7 +1,7 @@
-import { AvailabilitiesListResponse, AvailabilityResponse } from '@/types/API';
+import { AvailabilitiesListResponse, AvailabilityResponse, DetailResponse } from '@/types/API';
 import { CarParkCategories, CarParkSortParameters } from '@/types/CarParks';
 import { rest } from 'msw'
-import { defaultCarParks, defaultCategories } from './fixtures';
+import { carParkDetail, defaultCarParks, defaultCategories } from './fixtures';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
@@ -45,4 +45,12 @@ export const handlers = [
             })
         );
     }),
+
+    rest.get(`${BASE_URL}/car-parks/detail/:slug`, (_req, res, ctx) => {
+        return res(
+            ctx.json<DetailResponse>({
+                data: carParkDetail
+            })
+        )
+    })
 ]

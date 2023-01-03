@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import BreakpointValues from "./breakpoints";
 
 const GlobalStyle = createGlobalStyle`
     :root {
@@ -49,15 +50,28 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1 {
+        font-size: 2rem;
         font-family: 'Secular One', sans-serif;
+
+        @media (min-width: ${BreakpointValues.tl}) {
+            font-size: 3rem;
+        }
+
+        @media (min-width: ${BreakpointValues.ds}) {
+            font-size: 3.5rem;
+        }
     }
 
     h2 {
         font-weight: 600;
-        font-size: 24px;
+        font-size: 1.3rem;
         color: var(--colour-black);
         line-height: 1.1;
         margin: 0 0 6px;
+
+        @media (min-width: ${BreakpointValues.tl}) {
+            font-size: 1.6rem;
+        }
     }
 
     /* For images to not be able to exceed their container */

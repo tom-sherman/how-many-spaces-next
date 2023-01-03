@@ -1,12 +1,13 @@
 import { CarParkCategories, CarParkSortParameters } from "@/types/CarParks";
-import { ErrorResponse, AvailabilityResponse, AvailabilitiesListResponse } from "@/types/API";
+import { ErrorResponse, AvailabilityResponse, AvailabilitiesListResponse, DetailResponse } from "@/types/API";
 import axios from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 const AVAILABILITIES_ENDPOINT = 'car-parks/availabilities';
+const DETAIL_ENDPOINT = 'car-parks/detail';
 
 
-// /api/v1/availabilities/{location}
+// /api/v1/car-parks/availabilities/{location}
 export async function getCarParkAvailabilitiesList(
     location: string,
     category: CarParkCategories,
@@ -21,9 +22,18 @@ export async function getCarParkAvailabilitiesList(
     .then(response => response.data);
 }
 
-// /api/availabilities/{slug}
+// /api/v1/car-parks/availabilities/{slug}
 export async function getCarParkAvailability(
-    slug?: string
+    slug: string
 ): Promise<AvailabilityResponse> {
-    return axios.get(`${BASE_URL}/${AVAILABILITIES_ENDPOINT}/${slug}`);
+    return axios.get(`${BASE_URL}/${AVAILABILITIES_ENDPOINT}/${slug}`)
+        .then(response => response.data);
+}
+
+// /api/v1/car-parks/detail/{slug}
+export async function getCarParkDetail(
+    slug: string
+): Promise<DetailResponse> {
+    return axios.get(`${BASE_URL}/${DETAIL_ENDPOINT}/${slug}`)
+        .then(response => response.data)
 }

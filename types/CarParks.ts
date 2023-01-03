@@ -1,4 +1,4 @@
-import { Coordinates } from "./Utility"
+import { Coordinates, KeyValue } from "./Utility"
 
 export enum CarParkLocations {
     NORWICH = 'norwich'
@@ -40,16 +40,42 @@ export type CarParkAvailability = {
     isClosed: boolean,
     isClosingSoon: boolean,
     currentOpeningHours: string,
-    lastUpdated: number,
+    lastUpdated: string,
 }
 
-export type CarParkMeta = {
+export type CarParkPrices = {
+    table: KeyValue[],
+    note?: string,
+    lastUpdated: string,
+}
+
+export type CarParkOpeningHours = {
+    table: KeyValue[],
+    lastUpdated: string
+}
+
+export type CarParkDetail = {
     id: string,
     name: string,
     url: string,
-    introduction: string,
     status: CarParkStatuses,
-    location: Coordinates,
+    introduction: string,
+    coordinates?: Coordinates,
+    directionsUrl?:string,
+    websiteUrl?: string,
+    openingHours: CarParkOpeningHours,
+    prices: CarParkPrices,
+    category: CarParkCategories,
+    distanceFromCityCentre: number,
+    distanceFromTrainStation: number,
     shortAddress: string,
     totalSpaces: number,
+    availableSpaces: number,
+    availability: number,
+    isBusy: boolean,
+    isFull: boolean,
+    isClosed: boolean,
+    isClosingSoon: boolean,
+    currentOpeningHours: string,
+    lastUpdated: string,
 }

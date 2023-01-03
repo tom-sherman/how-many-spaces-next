@@ -1,5 +1,5 @@
 import { CategoryResponse } from "@/types/API";
-import { CarParkAvailability, CarParkCategories, CarParkStatuses } from "@/types/CarParks";
+import { CarParkAvailability, CarParkCategories, CarParkDetail, CarParkStatuses } from "@/types/CarParks";
 
 export const defaultCarParks: CarParkAvailability[] = [
     {
@@ -19,7 +19,7 @@ export const defaultCarParks: CarParkAvailability[] = [
         isClosed: false,
         isClosingSoon: false,
         currentOpeningHours: '8am - 6pm',
-        lastUpdated: 1668819661,
+        lastUpdated: '2023-01-03T12:08:50+00:00',
     },
     {
         id: 'abc-456',
@@ -38,7 +38,7 @@ export const defaultCarParks: CarParkAvailability[] = [
         isClosed: false,
         isClosingSoon: false,
         currentOpeningHours: '8am - 6pm',
-        lastUpdated: 1668819661,
+        lastUpdated: '2023-01-03T12:08:50+00:00',
     },
     {
         id: 'abc-789',
@@ -57,7 +57,7 @@ export const defaultCarParks: CarParkAvailability[] = [
         isClosed: false,
         isClosingSoon: true,
         currentOpeningHours: '8am - 6pm',
-        lastUpdated: 1668819661,
+        lastUpdated: '2023-01-03T12:08:50+00:00',
     },
     {
         id: 'abc-101',
@@ -76,7 +76,7 @@ export const defaultCarParks: CarParkAvailability[] = [
         isClosed: false,
         isClosingSoon: false,
         currentOpeningHours: '8am - 6pm',
-        lastUpdated: 1668819661,
+        lastUpdated: '2023-01-03T12:08:50+00:00',
     },
     {
         id: 'abc-121',
@@ -95,7 +95,7 @@ export const defaultCarParks: CarParkAvailability[] = [
         isClosed: true,
         isClosingSoon: false,
         currentOpeningHours: '8am - 6pm',
-        lastUpdated: 1668819661,
+        lastUpdated: '2023-01-03T12:08:50+00:00',
     },
 ];
 
@@ -113,3 +113,47 @@ export const defaultCategories: CategoryResponse[] = [
         name: 'Park & ride'
     }
 ];
+
+export const carParkDetail: CarParkDetail = {
+        "id": "2ebnX0OPXZB8JlR5AyVMP3OoaYbnpKwNlqgGQzD416je0Nk2x9dv7rEWJQ56xKy3",
+        "name": "St. Andrew's",
+        "url": "/car-park/st-andrews",
+        "status": CarParkStatuses.OPEN,
+        "introduction": "This is some test introduction text",
+        "coordinates": { "latitude": 1.29338300, "longitude": 52.63118710 },
+        "directionsUrl": "https://www.google.com/maps/place/St.+Andrews+Car+Park/@52.6311871,1.293383,15z/data=!4m5!3m4!1s0x0:0x2ab03b2b0fba2d57!8m2!3d52.6311561!4d1.2933844",
+        "websiteUrl": "https://www.norwich.gov.uk/directory_record/2176/st_andrews_multi-storey_car_park_nr3_3at",
+        "openingHours": {
+            "table": [
+                { "key": "Monday - Sunday", "value": "24 hours" },
+                { "key": "Bank holidays", "value": "7:00am - 6:30pm" }
+            ],
+            "lastUpdated": "2022-12-01T20:59:20+00:00"
+        },
+        "prices": {
+            "table": [
+                { "key": "Less than 1 hour", "value": "£2" },
+                { "key": "Less than 2 hours", "value": "£4" },
+                { "key": "Less than 3 hours", "value": "£6" },
+                { "key": "Less than 4 hours", "value": "£8" },
+                { "key": "Less than 5 hours", "value": "£9" },
+                { "key": "Over 5 hours", "value": "£10" },
+                { "key": "Evening charge (6:30pm - 7:00am)", "value": "£3" }
+            ],
+            "note": "Lost ticket fee of £25 applies. Where car park stays cross from the daytime period to the evening period then the two charges will be added together.",
+            "lastUpdated": "2022-11-30T00:00:00+00:00"
+        },
+        "category": CarParkCategories.CAR_PARK,
+        "distanceFromCityCentre": 1,
+        "distanceFromTrainStation": 1,
+        "shortAddress": "Duke Street, NR3 3AT",
+        "totalSpaces": 1084,
+        "availableSpaces": 62,
+        "availability": 5.72,
+        "isFull": false,
+        "isBusy": true,
+        "isClosed": false,
+        "isClosingSoon": false,
+        "currentOpeningHours": "",
+        "lastUpdated": "2023-01-03T14:20:22+00:00"
+}

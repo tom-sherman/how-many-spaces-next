@@ -32,7 +32,7 @@ export default function CarPark(props: CarParkAvailabilityProps) {
 
     const timeAgo = useMemo(() => {
         return formatDistance(
-            new Date(carPark.lastUpdated * 1000),
+            new Date(carPark.lastUpdated),
             new Date(),
             {
                 includeSeconds: true,

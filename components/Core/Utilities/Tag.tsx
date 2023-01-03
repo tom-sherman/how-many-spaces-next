@@ -10,6 +10,7 @@ type TagProps = {
     isError?: boolean,
     isNeutral?: boolean,
     icon?: IconProp,
+    wide?: boolean,
     label: string,
 }
 

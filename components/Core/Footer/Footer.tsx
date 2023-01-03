@@ -103,6 +103,7 @@ export default function Footer() {
                         </Copyright>
                     </Left>
                     <Right>
+                        <p>Powered by <a href="https://m.do.co/c/026819c4f1f9" target="_blank" rel="noopener">Digital Ocean</a> and <a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a>.</p>
                         <p>Our website uses <a href="https://usefathom.com/ref/KMHXMF" rel="noopener noreferrer" target="_blank">Fathom</a> for privacy-focused analytics.</p>
                     </Right>
                 </Inner>
