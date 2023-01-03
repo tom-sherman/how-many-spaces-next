@@ -58,12 +58,6 @@ export default function OffCanvas() {
                 <FontAwesomeIcon icon={faClose} />
             </OffCanvasClose>
             <OffCanvasNav>
-                <OffCanvasNavItem>
-                    <Link href="/about">About</Link>
-                </OffCanvasNavItem>
-                <OffCanvasNavItem>
-                    <Link href="/sponsor">Sponsor</Link>
-                </OffCanvasNavItem>
                 <ButtonNavItem>
                     <a href="#report-an-issue" onClick={handleReportButtonClick}>Report an issue</a>
                 </ButtonNavItem>

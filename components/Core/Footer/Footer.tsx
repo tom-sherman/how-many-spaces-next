@@ -91,22 +91,14 @@ export default function Footer() {
                 <Inner>
                     <Left>
                         <FooterNav>
-                            <NavItem>
-                                <Link href="/about">About</Link>
-                            </NavItem>
-                            <NavItem>
-                                <Link href="/sponsor">Sponsor</Link>
-                            </NavItem>
                             <ButtonNavItem>
-                                <a href="#report-an-issue" onClick={() => context.setIssueModalOpen(true)}>Report an issue</a>
+                                <a href="mailto:howmanyspaces@andrewhaine.co.uk">Report an issue</a>
                             </ButtonNavItem>
                         </FooterNav>
-                        <p>Although we endeavour to keep the car park information on this website as up to date as possible, much of the data is supplied by an external source which we are not responsible for. If you see something that doesn't look right, please use the “Report an issue” form linked above.</p>
+                        <p>Although we endeavour to keep the car park information on this website as up to date as possible, much of the data is supplied by an external source which we are not responsible for. If you see something that doesn't look right, please use the “Report an issue” link above.</p>
                         <Copyright>
                             <>
                                 <span>&copy; {time.getFullYear()} How Many Spaces?</span>
-                                <span><Link href='/privacy'>Privacy</Link></span>
-                                <span><Link href='#cookies'>Manage cookies</Link></span>
                             </>
                         </Copyright>
                     </Left>

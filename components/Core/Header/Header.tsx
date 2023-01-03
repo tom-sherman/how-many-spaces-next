@@ -215,14 +215,8 @@ export default function Header(props: HeaderProps) {
                             <OffCanvas />
                             <nav>
                                 <DesktopNav>
-                                    <NavItem largeGap>
-                                        <Link href="/about">About</Link>
-                                    </NavItem>
-                                    <NavItem largeGap>
-                                        <Link href="/sponsor">Sponsor</Link>
-                                    </NavItem>
                                     <ButtonNavItem largeGap>
-                                    <a href="#report-an-issue" onClick={() => context.setIssueModalOpen(true)}>Report an issue</a>
+                                    <a href="mailto:howmanyspaces@andrewhaine.co.uk">Report an issue</a>
                                     </ButtonNavItem>
                                 </DesktopNav>
                             </nav>
