@@ -1,5 +1,5 @@
-import { getCarParkList } from '@/actions/car-parks';
-import CarParkList from '@/components/CarParks/List/CarParkList';
+import { getCarParkAvailabilitiesList } from '@/actions/car-parks';
+import CarParkAvailabilitiesList from '@/components/CarParks/List/CarParkAvailabilitiesList';
 import ErrorBanner from '@/components/Core/Errors/ErrorBanner';
 import Header from '@/components/Core/Header/Header'
 import LoadingOverlay from '@/components/Core/Utilities/LoadingOverlay';
@@ -71,7 +71,7 @@ export default function Home() {
     refetchInterval: 60000,
     refetchOnWindowFocus: false,
     keepPreviousData: true,
-    queryFn: () => getCarParkList(LOCATION, selectedCategory, selectedSort),
+    queryFn: () => getCarParkAvailabilitiesList(LOCATION, selectedCategory, selectedSort),
   });
 
   return (
@@ -93,7 +93,7 @@ export default function Home() {
                     listQuery.isError ? (
                       <ErrorBanner title='Unable to fetch car parks' message='Unfortunately we encountered an issue fetching the car parks in this city, please check back shortly. If the problem persists please use the **Report an issue** link to get in touch with us.' />
                     ) : (
-                      listQuery.data ? <CarParkList data={listQuery.data} onCategoryChange={setSelectedCategory} onSortChange={setSelectedSort} /> : null
+                      listQuery.data ? <CarParkAvailabilitiesList data={listQuery.data} onCategoryChange={setSelectedCategory} onSortChange={setSelectedSort} /> : null
                     )
                   }
                 </CarParkListOuter>
@@ -116,7 +116,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
   await queryClient.prefetchQuery(
     ['car-park-list', LOCATION, CarParkCategories.CAR_PARK, CarParkSortParameters.SPACES_DESC],
-    () => getCarParkList(LOCATION, CarParkCategories.CAR_PARK, CarParkSortParameters.SPACES_DESC)
+    () => getCarParkAvailabilitiesList(LOCATION, CarParkCategories.CAR_PARK, CarParkSortParameters.SPACES_DESC)
   );
 
   res.setHeader(

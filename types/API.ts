@@ -1,4 +1,4 @@
-import { CarPark, CarParkCategories, CarParkMeta, CarParkSortParameters } from "./CarParks"
+import { CarParkCategories, CarParkAvailability, CarParkSortParameters } from "./CarParks"
 
 export enum ErrorTypes {
     SERVER_ERROR = 'server_error'
@@ -14,13 +14,13 @@ export type CategoryResponse = {
     name: string,
 }
 
-export interface ListResponse {
+export interface AvailabilitiesListResponse {
     categories: CategoryResponse[],
     category: CarParkCategories,
     sort: CarParkSortParameters,
-    data: CarPark[],
+    data: CarParkAvailability[],
 }
 
-export interface CarParkMetaResponse {
-    data: CarParkMeta
+export interface AvailabilityResponse {
+    data: CarParkAvailability
 }

@@ -1,8 +1,8 @@
-import { CarPark as CarParkContract, CarParkCategories, CarParkSortParameters } from "@/types/CarParks";
+import { CarParkCategories, CarParkSortParameters } from "@/types/CarParks";
 import styled from "styled-components";
 import CarParkCategoriesSelector from "./CarParkCategoriesSelector";
-import CarPark from '../CarPark';
-import { ListResponse } from "@/types/API";
+import CarParkAvailability from '../CarParkAvailability';
+import { AvailabilitiesListResponse } from "@/types/API";
 import CarParkSortSelector from "./CarParkSortSelector";
 import BreakpointValues from "@/styles/breakpoints";
 
@@ -22,13 +22,13 @@ const List = styled.div`
     padding: 24px 0 0;
 `
 
-type CarParkListProps = {
-    data: ListResponse,
+type CarParkAvailabilitiesListProps = {
+    data: AvailabilitiesListResponse,
     onCategoryChange: Function,
     onSortChange: Function,
 }
 
-export default function CarParkList(props: CarParkListProps) {
+export default function CarParkAvailabilitiesList(props: CarParkAvailabilitiesListProps) {
     const {
         data,
         onCategoryChange,
@@ -52,7 +52,7 @@ export default function CarParkList(props: CarParkListProps) {
             </Top>
             <List>
                 {
-                    data.data.map(carPark => <CarPark key={carPark.url} carPark={carPark} />)
+                    data.data.map(carPark => <CarParkAvailability key={carPark.url} carPark={carPark} />)
                 }
             </List>
         </>

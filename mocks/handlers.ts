@@ -1,5 +1,5 @@
-import { ListResponse } from '@/types/API';
-import { CarParkCategories, CarParkSortParameters, CarParkStatuses } from '@/types/CarParks';
+import { AvailabilitiesListResponse, AvailabilityResponse } from '@/types/API';
+import { CarParkCategories, CarParkSortParameters } from '@/types/CarParks';
 import { rest } from 'msw'
 import { defaultCarParks, defaultCategories } from './fixtures';
 
@@ -7,16 +7,15 @@ const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
 export const handlers = [
 
-    // /api/v1/car-parks/{location}
-    rest.get(`${BASE_URL}/car-parks/:location`, (_req, res, ctx) => {
+    rest.get(`${BASE_URL}/car-parks/availabilities/location/:location`, (_req, res, ctx) => {
         const params = <URLSearchParams> _req.url.searchParams;
         return res(
             ctx.delay(2000),
-            ctx.json<ListResponse>({
+            ctx.json<AvailabilitiesListResponse>({
                 categories: defaultCategories,
                 category: <CarParkCategories>params.get('category') ?? CarParkCategories.ALL,
                 sort: <CarParkSortParameters>params.get('sort') ?? CarParkSortParameters.SPACES_DESC,
-                carParks: defaultCarParks
+                data: defaultCarParks
                     .filter(carPark => {
                         if (params.get('category') === CarParkCategories.ALL) {
                             return true;
@@ -38,4 +37,12 @@ export const handlers = [
         )
     }),
 
+    rest.get(`${BASE_URL}/car-parks/availabilities/:slug`, (_req, res, ctx) => {
+        return res(
+            ctx.delay(2000),
+            ctx.json<AvailabilityResponse>({
+                data: defaultCarParks[0]
+            })
+        );
+    }),
 ]

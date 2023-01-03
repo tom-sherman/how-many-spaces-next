@@ -1,13 +1,13 @@
 import { CategoryResponse } from "@/types/API";
-import { CarPark, CarParkCategories, CarParkStatuses } from "@/types/CarParks";
+import { CarParkAvailability, CarParkCategories, CarParkStatuses } from "@/types/CarParks";
 
-export const defaultCarParks: CarPark[] = [
+export const defaultCarParks: CarParkAvailability[] = [
     {
         id: 'abc-123',
         name: 'St Andrews\'s Multi-Storey',
         url: 'http://localhost:3000/car-parks/st-andrews',
         status: CarParkStatuses.OPEN,
-        category: CarParkCategories.CAR_PARKS,
+        category: CarParkCategories.CAR_PARK,
         distanceFromCityCentre: 3,
         distanceFromTrainStation: 2,
         shortAddress: '2 Duke Street, NR3 3AJ',
@@ -45,7 +45,7 @@ export const defaultCarParks: CarPark[] = [
         name: 'The Forum',
         url: 'http://localhost:3000/car-parks/the-forum',
         status: CarParkStatuses.OPEN,
-        category: CarParkCategories.CAR_PARKS,
+        category: CarParkCategories.CAR_PARK,
         distanceFromCityCentre: 2,
         distanceFromTrainStation: 2,
         shortAddress: 'Bethel St, NR2 1TF',
@@ -64,7 +64,7 @@ export const defaultCarParks: CarPark[] = [
         name: 'John Lewis',
         url: 'http://localhost:3000/car-parks/john-lewis',
         status: CarParkStatuses.CLOSED,
-        category: CarParkCategories.CAR_PARKS,
+        category: CarParkCategories.CAR_PARK,
         distanceFromCityCentre: 3,
         distanceFromTrainStation: 5,
         shortAddress: 'All Saints Green, NR1 3LX',
@@ -83,7 +83,7 @@ export const defaultCarParks: CarPark[] = [
         name: 'Riverside',
         url: 'http://localhost:3000/car-parks/riverside',
         status: CarParkStatuses.CLOSED,
-        category: CarParkCategories.CAR_PARKS,
+        category: CarParkCategories.CAR_PARK,
         distanceFromCityCentre: 5,
         distanceFromTrainStation: 0,
         shortAddress: 'Koblenz Ave, NR1 1WT',
@@ -105,7 +105,7 @@ export const defaultCategories: CategoryResponse[] = [
         name: 'All',
     },
     {
-        category: CarParkCategories.CAR_PARKS,
+        category: CarParkCategories.CAR_PARK,
         name: 'Car parks',
     },
     {

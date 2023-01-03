@@ -1,5 +1,5 @@
 import * as Styles from "@/styles/components/CarParks/CarPark";
-import { CarPark as CarParkContract, CarParkCategories } from "@/types/CarParks"
+import { CarParkAvailability as CarParkAvailabilityContract, CarParkCategories } from "@/types/CarParks"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBus, faClock, faLocationDot, faParking } from "@fortawesome/free-solid-svg-icons";
 import SpacesIndicator from "./Elements/SpacesIndicator";
@@ -21,11 +21,11 @@ const DetailsButton = styled.span`
     }
 `
 
-type CarParkProps = {
-    carPark: CarParkContract
+type CarParkAvailabilityProps = {
+    carPark: CarParkAvailabilityContract
 }
 
-export default function CarPark(props: CarParkProps) {
+export default function CarPark(props: CarParkAvailabilityProps) {
     const {
         carPark
     } = props;

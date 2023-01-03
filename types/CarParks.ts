@@ -23,7 +23,7 @@ export enum CarParkSortParameters {
     TRAIN_STATION_DISTANCE_DESC = "TRAIN_STATION_DISTANCE_DESC",
 }
 
-export type CarPark = {
+export type CarParkAvailability = {
     id: string,
     name: string,
     url: string,
