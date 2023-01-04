@@ -26,6 +26,7 @@ const Article = styled.div`
 const Sidebar = styled.aside`
   padding: 0 20px;
   grid-column: 1 / 13;
+  margin-bottom: 24px;
   
   @media (min-width: ${BreakpointValues.ds}) {
     grid-column: 9 / 13;
