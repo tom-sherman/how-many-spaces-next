@@ -14,10 +14,21 @@ type CarParkCategoriesProps = {
 
 const MobileDisplay = styled.button`
     display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 14px;
 
     @media (min-width: ${BreakpointValues.ts}) {
         display: none;
     }
+
+    label {
+        font-weight: bold;
+        padding-bottom: 2px;
+        margin-right: 6px;
+        width: 40%;
+    }
+
 `
 
 const CategoriesList = styled.div`
@@ -91,12 +102,14 @@ export default function CarParkCategoriesSelector(props: CarParkCategoriesProps)
     return (
         <>
         <MobileDisplay>
+            <label htmlFor="car_park_sort_select">Show:</label>
             <Select
                 id="car_park_category_select"
                 defaultValue={{ value: 'SPACES_DESC', label: 'Most spaces' }}
                 styles={{
                     container: (baseStyles) => ({
                         ...baseStyles,
+                        width: '100%',
                         minWidth: '130px'
                     }),
                     control: (styles) => ({

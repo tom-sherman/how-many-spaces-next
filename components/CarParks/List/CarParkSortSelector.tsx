@@ -12,6 +12,7 @@ const Container = styled.div`
         font-weight: bold;
         padding-bottom: 2px;
         margin-right: 6px;
+        width: 40%;
     }
 `
 
@@ -64,7 +65,8 @@ export default function CarParkSortSelector(props: CarParkSortSelectorProps) {
                 styles={{
                     container: (baseStyles) => ({
                         ...baseStyles,
-                        minWidth: '130px'
+                        width: '100%',
+                        minWidth: '130px',
                     }),
                     control: (styles) => ({
                         ...styles,

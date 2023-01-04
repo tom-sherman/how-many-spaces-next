@@ -9,9 +9,11 @@ import BreakpointValues from "@/styles/breakpoints";
 const Top = styled.div`
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     border-bottom: 1px solid var(--colour-grey--lighter);
 
     @media (min-width: ${BreakpointValues.ts}) {
+        flex-direction: row;
         align-items: baseline;
     }
 `
