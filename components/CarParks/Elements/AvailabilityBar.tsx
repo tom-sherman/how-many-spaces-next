@@ -148,10 +148,14 @@ export default function AvailabilityBar(props: AvailabilityBarProps) {
                             label={statusLabel}
                         />
                     </Item>
-                    <Item>
-                        <ItemHeading>Availability</ItemHeading>
-                        <AvailabilityIndicator availability={data?.availability ?? 100} />
-                    </Item>
+                    {
+                        data?.status !== CarParkStatuses.CLOSED ? (
+                            <Item>
+                                <ItemHeading>Availability</ItemHeading>
+                                <AvailabilityIndicator availability={data?.availability ?? 100} />
+                            </Item>
+                        ) : null
+                    }
                     <Item>
                         <ItemHeading>Last updated</ItemHeading>
                         <ItemText>{ timeAgo }</ItemText>
