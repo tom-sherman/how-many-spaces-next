@@ -20,7 +20,7 @@ export default function Table(props: TableProps) {
                 <tbody>
                     {
                         data.map(({ key, value }, i) => (
-                            <tr>
+                            <tr key={i}>
                                 <td>{ key }</td>
                                 <td>{ value }</td>
                             </tr>

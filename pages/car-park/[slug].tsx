@@ -140,14 +140,14 @@ export default function CarParkPage(props: CarParkPageProps) {
                   {
                     detailQuery.data?.data.websiteUrl ? (
                       <p>
-                        <FontAwesomeIcon icon={faGlobe} /> <a href={detailQuery.data?.data.websiteUrl} target="_blank" rel="noopener">Website</a>
+                        <FontAwesomeIcon icon={faGlobe} /> <a href={detailQuery.data?.data.websiteUrl} target="_blank" rel="noreferrer">Website</a>
                       </p>
                     ) : null
                   }
                   {
                     detailQuery.data?.data.directionsUrl ? (
                       <p>
-                        <DirectionsButton href={detailQuery.data?.data.directionsUrl} target="_blank" rel="noopener">
+                        <DirectionsButton href={detailQuery.data?.data.directionsUrl} target="_blank" rel="noreferrer">
                           Get directions
                         </DirectionsButton>
                       </p>

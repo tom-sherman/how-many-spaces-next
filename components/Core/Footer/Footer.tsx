@@ -95,7 +95,7 @@ export default function Footer() {
                                 <a href="mailto:howmanyspaces@andrewhaine.co.uk">Report an issue</a>
                             </ButtonNavItem>
                         </FooterNav>
-                        <p>Although we endeavour to keep the car park information on this website as up to date as possible, much of the data is supplied by an external source which we are not responsible for. If you see something that doesn't look right, please use the “Report an issue” link above.</p>
+                        <p>Although we endeavour to keep the car park information on this website as up to date as possible, much of the data is supplied by an external source which we are not responsible for. If you see something that doesn&apos;t look right, please use the “Report an issue” link above.</p>
                         <Copyright>
                             <>
                                 <span>&copy; {time.getFullYear()} How Many Spaces?</span>
@@ -103,8 +103,8 @@ export default function Footer() {
                         </Copyright>
                     </Left>
                     <Right>
-                        <p>Powered by <a href="https://m.do.co/c/026819c4f1f9" target="_blank" rel="noopener">Digital Ocean</a> and <a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a>.</p>
-                        <p>Our website uses <a href="https://usefathom.com/ref/KMHXMF" rel="noopener noreferrer" target="_blank">Fathom</a> for privacy-focused analytics.</p>
+                        <p>Powered by <a href="https://m.do.co/c/026819c4f1f9" target="_blank" rel="noreferrer">Digital Ocean</a> and <a href="https://vercel.com/" target="_blank" rel="noreferrer">Vercel</a>.</p>
+                        <p>Our website uses <a href="https://usefathom.com/ref/KMHXMF" rel="noreferrer noreferrer" target="_blank">Fathom</a> for privacy-focused analytics.</p>
                     </Right>
                 </Inner>
             </SiteWidth>

@@ -195,13 +195,15 @@ const DesktopNav = styled(Nav)`
 
 type HeaderProps = {
     h1?: string,
-    leftContent: React.ReactNode
+    leftContent: React.ReactNode,
+    breadcrumb?: React.ReactNode,
 }
 
 export default function Header(props: HeaderProps) {
     const {
         h1,
-        leftContent
+        leftContent,
+        breadcrumb,
     } = props;
 
     const context = useAppContext();
@@ -235,6 +237,9 @@ export default function Header(props: HeaderProps) {
                         </TopRight>
                     </Top>
                     <Left>
+                        {
+                            breadcrumb ? breadcrumb : null
+                        }
                         {
                             h1 ? <h1>{h1}</h1> : null
                         }
