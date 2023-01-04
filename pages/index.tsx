@@ -7,9 +7,9 @@ import BreakpointValues from '@/styles/breakpoints';
 import { Columns, PageBody, SiteWidth } from '@/styles/layout';
 import { CarParkCategories, CarParkLocations, CarParkSortParameters } from '@/types/CarParks';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import useCanonicalUrl from 'hooks/useCanonicalUrl';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head'
-import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import styled from 'styled-components';
 
@@ -66,6 +66,8 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<CarParkCategories>(CarParkCategories.CAR_PARK);
   const [selectedSort, setSelectedSort] = useState<CarParkSortParameters>(CarParkSortParameters.SPACES_DESC);
 
+  const canonicalUrl = useCanonicalUrl();
+
   const listQuery = useQuery({
     queryKey: ['car-park-list', LOCATION, selectedCategory, selectedSort],
     refetchInterval: 60000,
@@ -76,10 +78,7 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Live car parking information for Norwich | How Many Spaces?</title>
-        <meta name="description" content="See in real time how many parking spaces are available in the car parks and park and ride sites around Norwich, Norfolk." />
-      </Head>
+      <NextSeo canonical={canonicalUrl} />
       <Header
         leftContent={<p>See the number of available car park spaces in a number of car parks around Norwich. Spaces are refreshed every 5 minutes to show you the most up to date parking information.</p>}
       />

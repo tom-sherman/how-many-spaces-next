@@ -1,6 +1,5 @@
 import { Columns, SiteWidth, PageBody } from '@/styles/layout';
 import Header from '@/components/Core/Header/Header'
-import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { getCarParkAvailability, getCarParkDetail } from '@/actions/car-parks';
@@ -14,6 +13,8 @@ import { CarParkCategories } from '@/types/CarParks';
 import Table from '@/components/Content/Table';
 import ButtonStyles from "@/styles/components/Utilities/Button";
 import { format } from 'date-fns';
+import useCanonicalUrl from 'hooks/useCanonicalUrl';
+import { NextSeo } from 'next-seo';
 
 const Article = styled.div`
   grid-column: 1 / 13;
@@ -66,6 +67,8 @@ type CarParkPageProps = {
 
 export default function CarParkPage(props: CarParkPageProps) {
 
+  const canonicalUrl = useCanonicalUrl();
+
   const detailQuery = useQuery({
     queryKey: ['car-park-detail', props.slug],
     refetchOnWindowFocus: false,
@@ -83,10 +86,11 @@ export default function CarParkPage(props: CarParkPageProps) {
 
   return (
     <>
-      <Head>
-        <title>How many spaces are available in { detailQuery.data?.data.name } car park?</title>
-        <meta name="description" content={`See in real time how many parking spaces are available in ${ detailQuery.data?.data.name } car park in Norwich`} />
-      </Head>
+      <NextSeo
+        canonical={canonicalUrl}
+        title={`${ detailQuery.data?.data.name } car park`}
+        description={`See in real time how many parking spaces are available in ${ detailQuery.data?.data.name } car park in Norwich`}
+      />
       <Header
         h1={detailQuery.data?.data.name}
         leftContent={<p>{ detailQuery.data?.data.introduction }</p>}

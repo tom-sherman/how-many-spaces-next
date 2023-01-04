@@ -8,6 +8,8 @@ import Footer from '@/components/Core/Footer/Footer';
 import { AppWrapper } from '@/context/app';
 import { useState } from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { DefaultSeo } from 'next-seo';
+import { NEXT_SEO_DEFAULT } from 'next-seo.config';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING_ENABLED === 'true') {
   require('../mocks');
@@ -30,6 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <AppWrapper>
           <GlobalStyle />
           <PageContainer>
+              <DefaultSeo {...NEXT_SEO_DEFAULT} />
               <Component {...pageProps} />
             <Footer />
           </PageContainer>
