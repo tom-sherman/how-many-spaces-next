@@ -1,4 +1,4 @@
-import CustomSelect from "@/components/Core/Utilities/Fields/ReactSelect"
+import Select from 'react-select';
 import BreakpointValues from "@/styles/breakpoints"
 import { CategoryResponse } from "@/types/API"
 import { CarParkCategories } from "@/types/CarParks"
@@ -91,9 +91,31 @@ export default function CarParkCategoriesSelector(props: CarParkCategoriesProps)
     return (
         <>
         <MobileDisplay>
-            <CustomSelect
+            <Select
                 id="car_park_category_select"
                 defaultValue={{ value: 'SPACES_DESC', label: 'Most spaces' }}
+                styles={{
+                    container: (baseStyles) => ({
+                        ...baseStyles,
+                        minWidth: '130px'
+                    }),
+                    control: (styles) => ({
+                        ...styles,
+                        cursor: 'pointer',
+                    }),
+                    option: (styles) => ({
+                        ...styles,
+                        cursor: 'pointer',
+                    })
+                }}
+                theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                        ...theme.colors,
+                        primary: 'var(--colour-blue)',
+                        primary75: 'var(--colour-blue)',
+                    }
+                })}
                 value={optionsForSelect.filter(({ value }) => value === props.category)}
                 options={optionsForSelect}
                 onChange={(newValue) => props.onSelect(newValue?.value)}

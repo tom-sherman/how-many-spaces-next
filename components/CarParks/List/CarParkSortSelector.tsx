@@ -1,4 +1,4 @@
-import CustomSelect from "@/components/Core/Utilities/Fields/ReactSelect";
+import Select from 'react-select';
 import { CarParkSortParameters } from "@/types/CarParks"
 import { useMemo } from "react";
 import styled from "styled-components";
@@ -58,9 +58,31 @@ export default function CarParkSortSelector(props: CarParkSortSelectorProps) {
      return (
         <Container>
             <label htmlFor="car_park_sort_select">Sort by:</label>
-            <CustomSelect
+            <Select
                 id="car_park_sort_select"
                 defaultValue={{ value: 'SPACES_DESC', label: 'Most spaces' }}
+                styles={{
+                    container: (baseStyles) => ({
+                        ...baseStyles,
+                        minWidth: '130px'
+                    }),
+                    control: (styles) => ({
+                        ...styles,
+                        cursor: 'pointer',
+                    }),
+                    option: (styles) => ({
+                        ...styles,
+                        cursor: 'pointer',
+                    })
+                }}
+                theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                        ...theme.colors,
+                        primary: 'var(--colour-blue)',
+                        primary75: 'var(--colour-blue)',
+                    }
+                })}
                 value={optionsForSelect.filter(({ value }) => value === sort)}
                 options={optionsForSelect}
                 onChange={(newValue) => onSelect(newValue?.value)}
