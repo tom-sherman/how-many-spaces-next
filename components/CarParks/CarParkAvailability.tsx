@@ -49,7 +49,7 @@ export default function CarPark(props: CarParkAvailabilityProps) {
         }, 1000)
 
         return () => clearInterval(interval);
-    }, [carPark.lastUpdated])
+    }, [carPark.lastUpdated, timeAgo])
 
     return (
         <Styles.CarParkPreview href={carPark.url} title={carPark.name}>
