@@ -41,10 +41,10 @@ export default function CarParkSortSelector(props: CarParkSortSelectorProps) {
                 case CarParkSortParameters.SPACES_DESC:
                     label = 'Most spaces';
                     break;
-                case CarParkSortParameters.CITY_CENTRE_DISTANCE_DESC:
+                case CarParkSortParameters.CITY_CENTRE_DISTANCE_ASC:
                     label = 'Closest to city centre';
                     break;
-                case CarParkSortParameters.TRAIN_STATION_DISTANCE_DESC:
+                case CarParkSortParameters.TRAIN_STATION_DISTANCE_ASC:
                     label = 'Closest to train station';
                     break;
             }

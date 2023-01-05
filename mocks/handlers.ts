@@ -23,11 +23,11 @@ export const handlers = [
                         return carPark.category === params.get('category');
                     })
                     .sort((a, b) => {
-                        if (params.get('sort') === CarParkSortParameters.CITY_CENTRE_DISTANCE_DESC) {
+                        if (params.get('sort') === CarParkSortParameters.CITY_CENTRE_DISTANCE_ASC) {
                             return a.distanceFromCityCentre - b.distanceFromCityCentre;
                         }
 
-                        if (params.get('sort') === CarParkSortParameters.TRAIN_STATION_DISTANCE_DESC) {
+                        if (params.get('sort') === CarParkSortParameters.TRAIN_STATION_DISTANCE_ASC) {
                             return a.distanceFromTrainStation - b.distanceFromTrainStation;
                         }
 
