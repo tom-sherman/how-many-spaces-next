@@ -80,7 +80,7 @@ export default function Home() {
     <>
       <NextSeo canonical={canonicalUrl} />
       <Header
-        leftContent={<p>See the number of available car park spaces in a number of car parks around Norwich. Spaces are refreshed every 5 minutes to show you the most up to date parking information.</p>}
+        leftContent={<p>See the live number of available car park spaces in a number of car parks and Park and Ride sites around Norwich. Spaces are refreshed every 5 minutes to show you the most up to date parking information.</p>}
       />
       <PageBody>
           <HomepageBody>

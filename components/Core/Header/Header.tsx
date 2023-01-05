@@ -229,8 +229,11 @@ export default function Header(props: HeaderProps) {
                             <OffCanvas />
                             <nav>
                                 <DesktopNav>
+                                    <NavItem>
+                                        <Link href="/">Home</Link>
+                                    </NavItem>
                                     <ButtonNavItem largeGap>
-                                    <a href="mailto:howmanyspaces@andrewhaine.co.uk">Report an issue</a>
+                                        <a href="mailto:howmanyspaces@andrewhaine.co.uk">Report an issue</a>
                                     </ButtonNavItem>
                                 </DesktopNav>
                             </nav>
