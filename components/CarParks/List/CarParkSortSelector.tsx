@@ -54,7 +54,7 @@ export default function CarParkSortSelector(props: CarParkSortSelectorProps) {
                 label
             };
         })
-    }, options);
+    }, [options]);
 
      return (
         <Container>

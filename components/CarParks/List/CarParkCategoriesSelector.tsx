@@ -97,7 +97,7 @@ export default function CarParkCategoriesSelector(props: CarParkCategoriesProps)
                     label
                 };
             })
-    }, props.visibleCategories);
+    }, [props.visibleCategories, props.categories]);
 
     return (
         <>
