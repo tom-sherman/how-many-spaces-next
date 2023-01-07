@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { formatDistance } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import BreakpointValues from "@/styles/breakpoints";
+import useTimeAgo from "hooks/useTimeAgo";
 
 const DetailsButton = styled.span`
     ${ButtonStyles};
@@ -30,20 +31,13 @@ export default function CarPark(props: CarParkAvailabilityProps) {
         carPark
     } = props;
 
-    const timeAgo = useMemo(() => {
-        return formatDistance(
-            new Date(carPark.lastUpdated),
-            new Date(),
-            {
-                includeSeconds: true,
-                addSuffix: true
-            }
-        );
-    }, [carPark.lastUpdated]);
+    const timeAgo = useTimeAgo(carPark.lastUpdated);
 
     const [updatedAtDistance, setUpdatedAtDistance] = useState<string>(timeAgo);
 
     useEffect(() => {
+        setUpdatedAtDistance(timeAgo);
+
         const interval = setInterval(() => {
             setUpdatedAtDistance(timeAgo);
         }, 1000)

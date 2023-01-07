@@ -6,6 +6,7 @@ import { useMemo } from "react"
 import AvailabilityIndicator from "./AvailabilityIndicator"
 import BreakpointValues from "@/styles/breakpoints"
 import { formatDistance } from "date-fns"
+import useTimeAgo from "hooks/useTimeAgo"
 
 const Container = styled.div`
     width: calc(100% + 40px);
@@ -117,16 +118,7 @@ export default function AvailabilityBar(props: AvailabilityBarProps) {
         }
     }, [data?.status, data?.isBusy, data?.isFull]);
 
-    const timeAgo = useMemo(() => {
-        return formatDistance(
-            new Date(data?.lastUpdated ?? new Date()),
-            new Date(),
-            {
-                includeSeconds: true,
-                addSuffix: true
-            }
-        );
-    }, [data?.lastUpdated]);
+    const timeAgo = useTimeAgo(data?.lastUpdated ?? new Date().toDateString());
 
     return (
         <Container>
