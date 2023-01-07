@@ -138,17 +138,6 @@ const Logo = styled.figure`
     }
 `
 
-const Beta = styled.span`
-    display: inline-block;
-    padding: 2px 5px 1px 4px;
-    color: var(--colour-blue);
-    background-color: white;
-    font-weight: bold;
-    font-size: .75rem;
-    margin-bottom: 5px;
-    border-radius: 5px;
-`
-
 const LogoLocation = styled.span`
     display: block;
     color: white;
@@ -226,7 +215,6 @@ export default function Header(props: HeaderProps) {
                     <Top>
                         <TopLeft>
                             <Logo>
-                                <Beta>Beta</Beta>
                                 <Link href="/">
                                     <img
                                         src='/branding/logo.svg'
