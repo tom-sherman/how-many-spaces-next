@@ -97,7 +97,6 @@ const TopRight = styled.div`
 const Left = styled.div`
     display: block;
     grid-column: 1 / 13;
-    margin-bottom: 16px;
 
     * {
         color: white;
@@ -108,7 +107,7 @@ const Left = styled.div`
     }
 
     @media (min-width: ${breakpoints.tl}) {
-        margin-bottom: 24px;
+        margin-bottom: 16px;
         grid-column: 1 / 9;
 
         p {
@@ -184,7 +183,7 @@ const DesktopNav = styled(Nav)`
 `
 
 const Breadcrumb = styled.div`
-    margin: 0 0 10px;
+    margin: 0 0 16px;
 
     a {
         &:hover {

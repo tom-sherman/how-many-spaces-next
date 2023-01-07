@@ -50,7 +50,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
         line-height: 1.2;
         font-family: 'Secular One', sans-serif;
         margin: 0 0 14px;
