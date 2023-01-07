@@ -107,6 +107,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     p {
+        margin: 0 0 1em;
+
         a {
             text-decoration: underline;
 
