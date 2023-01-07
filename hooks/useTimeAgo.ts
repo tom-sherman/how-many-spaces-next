@@ -1,20 +1,24 @@
 import { formatDistance } from "date-fns";
 import { useEffect, useState } from "react";
 
-export default function useTimeAgo(dateString: string): string {
-    const currentTimeAgo = formatDistance(
-        new Date(dateString),
+function calculateTimeAgo(date: Date): string {
+    return formatDistance(
+        date,
         new Date(),
         {
             includeSeconds: true,
             addSuffix: true
         }
     );
-    
+}
+
+export default function useTimeAgo(dateString: string): string {
+    const currentTimeAgo = calculateTimeAgo(new Date(dateString));
     const [timeAgo, setTimeAgo] = useState(currentTimeAgo);
 
     useEffect(() => {
         let interval = setInterval(() => {
+            const currentTimeAgo = calculateTimeAgo(new Date(dateString));
             setTimeAgo(currentTimeAgo);
         }, 5000);
 
