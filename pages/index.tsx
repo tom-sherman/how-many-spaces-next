@@ -8,6 +8,7 @@ import { Columns, PageBody, SiteWidth } from '@/styles/layout';
 import { CarParkCategories, CarParkLocations, CarParkSortParameters } from '@/types/CarParks';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import useCanonicalUrl from 'hooks/useCanonicalUrl';
+import useResetGlobalElements from 'hooks/useResetGlobalElements';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
@@ -76,6 +77,8 @@ export default function Home() {
   const [selectedSort, setSelectedSort] = useState<CarParkSortParameters>(CarParkSortParameters.SPACES_DESC);
 
   const canonicalUrl = useCanonicalUrl();
+
+  useResetGlobalElements();
 
   const listQuery = useQuery({
     queryKey: ['car-park-list', LOCATION, selectedCategory, selectedSort],

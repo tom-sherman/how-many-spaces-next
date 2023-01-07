@@ -15,6 +15,7 @@ import ButtonStyles from "@/styles/components/Utilities/Button";
 import { format } from 'date-fns';
 import useCanonicalUrl from 'hooks/useCanonicalUrl';
 import { NextSeo } from 'next-seo';
+import useResetGlobalElements from 'hooks/useResetGlobalElements';
 
 const Article = styled.div`
   grid-column: 1 / 13;
@@ -67,6 +68,7 @@ type CarParkPageProps = {
 
 export default function CarParkPage(props: CarParkPageProps) {
 
+  useResetGlobalElements();
   const canonicalUrl = useCanonicalUrl();
 
   const detailQuery = useQuery({

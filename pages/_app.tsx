@@ -29,6 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
 
+  // Track pageviews with Fathom analytics
   useEffect(() => {
     Fathom.load('PFRSUKKW', {
       includedDomains: ['norwich.howmanyspaces.com'],
@@ -44,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return () => {
       router.events.off('routeChangeComplete', onRouteChangeComplete);
     };
-  }, []);
+  }, [router.events]);
 
   return (
     <QueryClientProvider client={queryClient}>

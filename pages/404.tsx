@@ -1,8 +1,11 @@
 import Header from '@/components/Core/Header/Header'
 import { Columns, PageBody, SiteWidth } from '@/styles/layout';
+import useResetGlobalElements from 'hooks/useResetGlobalElements';
 import Link from 'next/link';
 
 export default function NotFound() {
+  useResetGlobalElements();
+
   return (
     <>
       <Header
