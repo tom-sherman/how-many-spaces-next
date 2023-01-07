@@ -33,6 +33,10 @@ const Outer = styled.div`
     }
 `
 
+const Left = styled.div`
+    margin-right: 16px;
+`
+
 const Items = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -123,12 +127,14 @@ export default function AvailabilityBar(props: AvailabilityBarProps) {
     return (
         <Container>
             <Outer>
-                <SpacesIndicator
-                    isBusy={data?.isBusy ?? false}
-                    isClosed={data?.isClosed ?? false}
-                    isFull={data?.isFull ?? false}
-                    availableSpaces={data?.availableSpaces}
-                />
+                <Left>
+                    <SpacesIndicator
+                        isBusy={data?.isBusy ?? false}
+                        isClosed={data?.isClosed ?? false}
+                        isFull={data?.isFull ?? false}
+                        availableSpaces={data?.availableSpaces}
+                    />
+                </Left>
                 <Items>
                     <Item>
                         <ItemHeading>Status</ItemHeading>
