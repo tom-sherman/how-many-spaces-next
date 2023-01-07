@@ -122,6 +122,7 @@ const Left = styled.div`
 `
 
 const Logo = styled.figure`
+    position: relative;
     width: 240px;
 
     @media (min-width: ${breakpoints.ts}) {
@@ -227,7 +228,10 @@ export default function Header(props: HeaderProps) {
                             <Logo>
                                 <Beta>Beta</Beta>
                                 <Link href="/">
-                                    <img src="/branding/logo.svg" alt="How Many Spaces? logo" />
+                                    <img
+                                        src='/branding/logo.svg'
+                                        alt="How Many Spaces? logo"
+                                    />
                                 </Link>
                             </Logo>
                             <LogoLocation>Norwich</LogoLocation>
