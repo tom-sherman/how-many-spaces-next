@@ -2,6 +2,7 @@ import Select from 'react-select';
 import { CarParkSortParameters } from "@/types/CarParks"
 import { useMemo } from "react";
 import styled from "styled-components";
+import BreakpointValues from '@/styles/breakpoints';
 
 const Container = styled.div`
     display: flex;
@@ -13,6 +14,11 @@ const Container = styled.div`
         padding-bottom: 2px;
         margin-right: 6px;
         width: 40%;
+        white-space: nowrap;
+
+        @media (min-width: ${BreakpointValues.ds}) {
+            width: auto;
+        }
     }
 `
 
