@@ -51,7 +51,9 @@ const GlobalStyle = createGlobalStyle`
 
     h1 {
         font-size: 2rem;
+        line-height: 1.2;
         font-family: 'Secular One', sans-serif;
+        margin: 0 0 14px;
 
         @media (min-width: ${BreakpointValues.tl}) {
             font-size: 3rem;
