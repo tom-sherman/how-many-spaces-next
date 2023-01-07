@@ -170,25 +170,29 @@ export default function CarParkPage(props: CarParkPageProps) {
 export const getServerSideProps: GetServerSideProps = async ({ params, res }) => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(
-    ['car-park-detail', params?.slug],
-    () => getCarParkDetail(String(params?.slug)),
-  );
+  try {
+    const [detailResponse, availabilityResponse] = await Promise.all([
+      getCarParkDetail(String(params?.slug)),
+      getCarParkAvailability(String(params?.slug)),
+    ]);
 
-  await queryClient.prefetchQuery(
-    ['car-park-availability', params?.slug],
-    () => getCarParkAvailability(String(params?.slug)),
-  );
+    queryClient.setQueryData(['car-park-detail', params?.slug], detailResponse);
+    queryClient.setQueryData(['car-park-availability', params?.slug], availabilityResponse);
 
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, state-while-revalidate=60'
-  );
-
-  return {
-    props: {
-      slug: String(params?.slug),
-      dehydratedState: dehydrate(queryClient),
-    },
+    res.setHeader(
+      'Cache-Control',
+      'public, s-maxage=10, state-while-revalidate=60'
+    );
+  
+    return {
+      props: {
+        slug: String(params?.slug),
+        dehydratedState: dehydrate(queryClient),
+      },
+    }
+  } catch (e) {
+    return {
+      notFound: true
+    }
   }
 }
