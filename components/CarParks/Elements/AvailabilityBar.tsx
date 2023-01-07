@@ -40,7 +40,7 @@ const Items = styled.div`
 const Item = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 5px 0;
+    margin: 7px 0;
     margin-right: 15px;
 
     & > div {
@@ -48,7 +48,6 @@ const Item = styled.div`
         align-items: center;
         justify-content: center;
         min-width: 80px;
-        min-height: 28px;
         text-align: center;
     }
 
@@ -60,6 +59,7 @@ const Item = styled.div`
         }
 
         & > div {
+            min-height: 28px;
             min-width: 120px;
         }
     }
