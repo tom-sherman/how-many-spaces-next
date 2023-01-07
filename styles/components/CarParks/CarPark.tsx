@@ -67,7 +67,7 @@ export const TitleMain = styled.div`
 export const Tags = styled.div`
     display: none;
 
-    @media (min-width ${BreakpointValues.tl}) {
+    @media (min-width: ${BreakpointValues.tl}) {
         display: flex;
     }
 `
