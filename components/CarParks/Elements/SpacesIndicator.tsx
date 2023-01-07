@@ -11,7 +11,6 @@ const Container = styled(Indicator)`
     width: 70px;
     height: 70px;
     border-width: 3px;
-    margin-right: 20px;
     border-radius: 50%;
 
     figcaption {

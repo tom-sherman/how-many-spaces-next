@@ -4,7 +4,6 @@ import styled from 'styled-components'
 
 export const CarParkPreview = styled(Link)`
     display: flex;
-    align-items: center;
     padding: 14px 12px;
     border: 1px solid var(--colour-grey--lighter);
     border-radius: 16px;
@@ -22,6 +21,7 @@ export const CarParkPreview = styled(Link)`
 
     @media (min-width: ${BreakpointValues.tl}) {
         padding: 12px;
+        align-items: center;
     }
 `
 
@@ -65,7 +65,11 @@ export const TitleMain = styled.div`
 `
 
 export const Tags = styled.div`
-    display: flex;
+    display: none;
+
+    @media (min-width ${BreakpointValues.tl}) {
+        display: flex;
+    }
 `
 
 export const Bottom = styled.div`
@@ -92,5 +96,24 @@ export const Actions = styled.div`
 
     @media (min-width: ${BreakpointValues.dl}) {
         margin-top: 0;
+    }
+`
+
+export const CarParkPreviewLeft = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 20px;
+`
+
+export const LeftTags = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 14px 0 0;
+    text-align: center;
+
+    @media (min-width: ${BreakpointValues.tl}) {
+        display: none;
     }
 `

@@ -7,7 +7,6 @@ import Tag from "../Core/Utilities/Tag";
 import MetaItem from "./Elements/MetaItem";
 import ButtonStyles from "@/styles/components/Utilities/Button";
 import styled from "styled-components";
-import { formatDistance } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import BreakpointValues from "@/styles/breakpoints";
 import useTimeAgo from "hooks/useTimeAgo";
@@ -47,12 +46,20 @@ export default function CarPark(props: CarParkAvailabilityProps) {
 
     return (
         <Styles.CarParkPreview href={carPark.url} title={carPark.name}>
-            <SpacesIndicator
-                isFull={carPark.isFull}
-                isClosed={carPark.isClosed}
-                isBusy={carPark.isBusy}
-                availableSpaces={carPark.availableSpaces}
-            />
+            <Styles.CarParkPreviewLeft>
+                <SpacesIndicator
+                    isFull={carPark.isFull}
+                    isClosed={carPark.isClosed}
+                    isBusy={carPark.isBusy}
+                    availableSpaces={carPark.availableSpaces}
+                />
+                <Styles.LeftTags>
+                    { carPark.isFull ? <Tag label="Full" isError /> : null }
+                    { carPark.isBusy ? <Tag label="Busy" isWarning /> : null }
+                    { carPark.isClosingSoon ? <Tag label="Closing soon" isWarning icon={faClock} /> : null }
+                    { carPark.isClosed ? <Tag label={`Closed`} isNeutral /> : null }
+                </Styles.LeftTags>
+            </Styles.CarParkPreviewLeft>
             <Styles.CarParkPreviewContent>
                 <Styles.Title isClosed={carPark.isClosed}>
                     <Styles.TitleMain>

@@ -19,8 +19,8 @@ const TagOuter = styled(Indicator)`
     border-radius: 10px;
     border-width: 2px;
     font-size: 0.9rem;
-    padding: 4px 8px 2px;
-    line-height: 1.25;
+    padding: 4px 8px;
+    line-height: 1.1;
 
     &:not(:last-child) {
         margin-right: 10px;
