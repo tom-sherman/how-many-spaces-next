@@ -112,7 +112,7 @@ export default function CarParkPage(props: CarParkPageProps) {
                 <ContentBlock>
                   <h2><FontAwesomeIcon icon={faClock} /> When is {detailQuery.data?.data.name} car park open?</h2>
                   {
-                    detailQuery.data?.data.openingHours ? (
+                    detailQuery.data?.data.openingHours?.table?.length ? (
                       <Table
                         data={detailQuery.data.data.openingHours.table}
                         leftNote={detailQuery.data.data.openingHours.note}
@@ -121,19 +121,20 @@ export default function CarParkPage(props: CarParkPageProps) {
                     ) : null
                   }
                 </ContentBlock>
-                {
-                  detailQuery.data?.data.category && detailQuery.data?.data.category !== CarParkCategories.PARK_AND_RIDE ? (
-                    <ContentBlock>
-                      <h2><FontAwesomeIcon icon={faTicket} /> How much does it cost to park at {detailQuery.data?.data.name}?</h2>
-                      
+                  <ContentBlock>
+                    {
+                      detailQuery.data?.data.category && detailQuery.data?.data.category !== CarParkCategories.PARK_AND_RIDE ? (
+                        <>
+                          <h2><FontAwesomeIcon icon={faTicket} /> How much does it cost to park at {detailQuery.data?.data.name}?</h2>
                           <Table
                             data={detailQuery.data.data.prices.table}
                             leftNote={detailQuery.data.data.prices.note}
                             rightNote={detailQuery.data.data.prices.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.prices.lastUpdated), 'dd/MM/yy')}` : null}
                           />
+                        </>
+                        ) : null
+                    }
                     </ContentBlock>
-                  ) : null
-                }
               </Content>
             </Article>
             <Sidebar>
