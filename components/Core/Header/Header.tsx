@@ -193,6 +193,16 @@ const DesktopNav = styled(Nav)`
     }
 `
 
+const Breadcrumb = styled.div`
+    margin: 0 0 10px;
+
+    a {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+`
+
 type HeaderProps = {
     h1?: string,
     leftContent: React.ReactNode,
@@ -241,7 +251,7 @@ export default function Header(props: HeaderProps) {
                     </Top>
                     <Left>
                         {
-                            breadcrumb ? breadcrumb : null
+                            breadcrumb ? <Breadcrumb>{ breadcrumb }</Breadcrumb> : null
                         }
                         {
                             h1 ? <h1>{h1}</h1> : null

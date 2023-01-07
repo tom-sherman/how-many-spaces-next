@@ -8,7 +8,7 @@ import BreakpointValues from '@/styles/breakpoints';
 import AvailabilityBar from '@/components/CarParks/Elements/AvailabilityBar';
 import { Content, ContentBlock } from '@/styles/components/Content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faGlobe, faLocationDot, faParking, faTicket } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faGlobe, faLocationDot, faParking, faTicket, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { CarParkCategories } from '@/types/CarParks';
 import Table from '@/components/Content/Table';
 import ButtonStyles from "@/styles/components/Utilities/Button";
@@ -16,6 +16,7 @@ import { format } from 'date-fns';
 import useCanonicalUrl from 'hooks/useCanonicalUrl';
 import { NextSeo } from 'next-seo';
 import useResetGlobalElements from 'hooks/useResetGlobalElements';
+import Link from 'next/link';
 
 const Article = styled.div`
   grid-column: 1 / 13;
@@ -96,6 +97,7 @@ export default function CarParkPage(props: CarParkPageProps) {
       <Header
         h1={detailQuery.data?.data.name}
         leftContent={<p>{ detailQuery.data?.data.introduction }</p>}
+        breadcrumb={<Link href="/"><FontAwesomeIcon icon={faArrowLeft} /> Back to all car parks</Link>}
       />
       <PageBody>
         <SiteWidth>
