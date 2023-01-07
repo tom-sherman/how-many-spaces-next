@@ -154,7 +154,7 @@ const LogoLocation = styled.span`
     }
 
     @media (min-width: ${breakpoints.ds}) {
-        margin: 0 16px 5px;
+        margin: 0 16px 8px;
     }
 `
 
