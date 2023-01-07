@@ -128,6 +128,7 @@ export const carParkDetail: CarParkDetail = {
                 { "key": "Monday - Sunday", "value": "24 hours" },
                 { "key": "Bank holidays", "value": "7:00am - 6:30pm" }
             ],
+            "note": null,
             "lastUpdated": "2022-12-01T20:59:20+00:00"
         },
         "prices": {

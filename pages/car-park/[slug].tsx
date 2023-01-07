@@ -113,6 +113,7 @@ export default function CarParkPage(props: CarParkPageProps) {
                     detailQuery.data?.data.openingHours ? (
                       <Table
                         data={detailQuery.data.data.openingHours.table}
+                        leftNote={detailQuery.data.data.openingHours.note}
                         rightNote={detailQuery.data.data.openingHours.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.openingHours.lastUpdated), 'dd/MM/yy')}` : null}
                       />
                     ) : null
@@ -125,8 +126,8 @@ export default function CarParkPage(props: CarParkPageProps) {
                       
                           <Table
                             data={detailQuery.data.data.prices.table}
-                            rightNote={detailQuery.data.data.prices.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.prices.lastUpdated), 'dd/MM/yy')}` : null}
                             leftNote={detailQuery.data.data.prices.note}
+                            rightNote={detailQuery.data.data.prices.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.prices.lastUpdated), 'dd/MM/yy')}` : null}
                           />
                     </ContentBlock>
                   ) : null

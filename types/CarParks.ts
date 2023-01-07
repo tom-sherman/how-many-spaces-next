@@ -45,12 +45,13 @@ export type CarParkAvailability = {
 
 export type CarParkPrices = {
     table: KeyValue[],
-    note?: string,
+    note: string|null,
     lastUpdated: string,
 }
 
 export type CarParkOpeningHours = {
     table: KeyValue[],
+    note: string|null
     lastUpdated: string
 }
 
