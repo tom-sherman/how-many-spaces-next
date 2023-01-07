@@ -97,70 +97,70 @@ export default function CarParkPage(props: CarParkPageProps) {
       />
       <PageBody>
         <SiteWidth>
-            <Columns>
-              <Article>
-                <AvailabilityBar
-                  data={availabilityQuery.data?.data}
-                />
-                <Content>
-                  <ContentBlock>
-                    <h2><FontAwesomeIcon icon={faParking} /> How many spaces are there in {detailQuery.data?.data.name} car park?</h2>
-                    <p>There are { availabilityQuery.data?.data.totalSpaces } spaces, currently, <strong>{ availabilityQuery.data?.data.availableSpaces }</strong> are available.</p>
-                  </ContentBlock>
-                  <ContentBlock>
-                    <h2><FontAwesomeIcon icon={faClock} /> When is {detailQuery.data?.data.name} car park open?</h2>
-                    {
-                      detailQuery.data?.data.openingHours ? (
-                        <Table
-                          data={detailQuery.data.data.openingHours.table}
-                          rightNote={detailQuery.data.data.openingHours.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.openingHours.lastUpdated), 'dd/MM/yy')}` : null}
-                        />
-                      ) : null
-                    }
-                  </ContentBlock>
+          <Columns>
+            <Article>
+              <AvailabilityBar
+                data={availabilityQuery.data?.data}
+              />
+              <Content>
+                <ContentBlock>
+                  <h2><FontAwesomeIcon icon={faParking} /> How many spaces are there in {detailQuery.data?.data.name} car park?</h2>
+                  <p>There are { availabilityQuery.data?.data.totalSpaces } spaces, currently, <strong>{ availabilityQuery.data?.data.availableSpaces }</strong> are available.</p>
+                </ContentBlock>
+                <ContentBlock>
+                  <h2><FontAwesomeIcon icon={faClock} /> When is {detailQuery.data?.data.name} car park open?</h2>
                   {
-                    detailQuery.data?.data.category && detailQuery.data?.data.category !== CarParkCategories.PARK_AND_RIDE ? (
-                      <ContentBlock>
-                        <h2><FontAwesomeIcon icon={faTicket} /> How much does it cost to park at {detailQuery.data?.data.name}?</h2>
-                        
-                            <Table
-                              data={detailQuery.data.data.prices.table}
-                              rightNote={detailQuery.data.data.prices.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.prices.lastUpdated), 'dd/MM/yy')}` : null}
-                              leftNote={detailQuery.data.data.prices.note}
-                            />
-                      </ContentBlock>
+                    detailQuery.data?.data.openingHours ? (
+                      <Table
+                        data={detailQuery.data.data.openingHours.table}
+                        rightNote={detailQuery.data.data.openingHours.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.openingHours.lastUpdated), 'dd/MM/yy')}` : null}
+                      />
                     ) : null
                   }
-                </Content>
-              </Article>
-              <Sidebar>
-                <SidebarInner>
-                  {
-                    detailQuery.data?.data.shortAddress ? (
-                      <p>
-                        <FontAwesomeIcon icon={faLocationDot} /> { detailQuery.data?.data.shortAddress }
-                      </p>
-                    ) : null
-                  }
-                  {
-                    detailQuery.data?.data.websiteUrl ? (
-                      <p>
-                        <FontAwesomeIcon icon={faGlobe} /> <a href={detailQuery.data?.data.websiteUrl} target="_blank" rel="noreferrer">Website</a>
-                      </p>
-                    ) : null
-                  }
-                  {
-                    detailQuery.data?.data.directionsUrl ? (
-                      <p>
-                        <DirectionsButton href={detailQuery.data?.data.directionsUrl} target="_blank" rel="noreferrer">
-                          Get directions
-                        </DirectionsButton>
-                      </p>
-                    ) : null
-                  }
-                </SidebarInner>
-              </Sidebar>
-            </Columns>
+                </ContentBlock>
+                {
+                  detailQuery.data?.data.category && detailQuery.data?.data.category !== CarParkCategories.PARK_AND_RIDE ? (
+                    <ContentBlock>
+                      <h2><FontAwesomeIcon icon={faTicket} /> How much does it cost to park at {detailQuery.data?.data.name}?</h2>
+                      
+                          <Table
+                            data={detailQuery.data.data.prices.table}
+                            rightNote={detailQuery.data.data.prices.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.prices.lastUpdated), 'dd/MM/yy')}` : null}
+                            leftNote={detailQuery.data.data.prices.note}
+                          />
+                    </ContentBlock>
+                  ) : null
+                }
+              </Content>
+            </Article>
+            <Sidebar>
+              <SidebarInner>
+                {
+                  detailQuery.data?.data.shortAddress ? (
+                    <p>
+                      <FontAwesomeIcon icon={faLocationDot} /> { detailQuery.data?.data.shortAddress }
+                    </p>
+                  ) : null
+                }
+                {
+                  detailQuery.data?.data.websiteUrl ? (
+                    <p>
+                      <FontAwesomeIcon icon={faGlobe} /> <a href={detailQuery.data?.data.websiteUrl} target="_blank" rel="noreferrer">Website</a>
+                    </p>
+                  ) : null
+                }
+                {
+                  detailQuery.data?.data.directionsUrl ? (
+                    <p>
+                      <DirectionsButton href={detailQuery.data?.data.directionsUrl} target="_blank" rel="noreferrer">
+                        Get directions
+                      </DirectionsButton>
+                    </p>
+                  ) : null
+                }
+              </SidebarInner>
+            </Sidebar>
+          </Columns>
         </SiteWidth>
       </PageBody>
     </>

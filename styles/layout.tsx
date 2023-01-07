@@ -16,4 +16,5 @@ export const Columns = styled.div`
 export const PageBody = styled.div`
   position: relative;
   flex-grow: 1;
+  padding: 0 20px;
 `;

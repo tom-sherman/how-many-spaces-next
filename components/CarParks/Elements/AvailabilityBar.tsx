@@ -8,14 +8,13 @@ import BreakpointValues from "@/styles/breakpoints"
 import { formatDistance } from "date-fns"
 
 const Container = styled.div`
-    margin: 0 0 20px;
-
-    @media(min-width: ${BreakpointValues.ds}) {
-        padding: 0 20px;
-    }
+    width: calc(100% + 40px);
+    margin: 0 0 20px -20px;
     
-    @media(min-width: ${BreakpointValues.dl}) {
+    @media(min-width: ${BreakpointValues.ds}) {
         padding: 0;
+        margin-left: 0;
+        width: 100%;
     }
 `
 

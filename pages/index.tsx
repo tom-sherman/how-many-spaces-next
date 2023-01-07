@@ -17,8 +17,10 @@ const LOCATION = CarParkLocations.NORWICH;
 
 const HomepageBody = styled.div`
   display: block;
-  padding: 0 20px;
-  margin-top: 20px;
+  
+  @media (min-width: ${BreakpointValues.ts}) {
+    margin-top: 20px;
+  }
 
   @media (min-width: ${BreakpointValues.tl}) {
     margin-top: -70px;
@@ -30,10 +32,17 @@ const CarParkListOuter = styled.div`
   background-color: white;
   grid-column: 1 / 13;
   padding: 20px;
-  border-radius: 15px;
   min-height: 500px;
+  margin-left: -20px;
+  width: calc(100% + 40px);
   margin-bottom: 20px;
   overflow: hidden;
+
+  @media (min-width: ${BreakpointValues.ts}) {
+    border-radius: 15px;
+    width: unset;
+    margin-left: 0;
+  }
 
   @media (min-width: ${BreakpointValues.ds}) {
       grid-column: 1 / 9;
