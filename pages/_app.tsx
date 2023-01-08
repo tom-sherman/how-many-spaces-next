@@ -51,7 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
     <Head>
-      <meta name='twitter:image' content="/twitter-share.png" />
+      <meta name='twitter:image' content={`${process.env.NEXT_PUBLIC_URL}/twitter-share.png`} />
     </Head>
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
