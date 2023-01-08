@@ -11,6 +11,7 @@ import { DefaultSeo } from 'next-seo';
 import { NEXT_SEO_DEFAULT } from 'next-seo.config';
 import * as Fathom from 'fathom-client';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING_ENABLED === 'true') {
   require('../mocks');
@@ -48,6 +49,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   return (
+    <>
+    <Head>
+      <meta name='twitter:image' content="/twitter-share.png" />
+    </Head>
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <AppWrapper>
@@ -60,6 +65,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </AppWrapper>
       </Hydrate>
     </QueryClientProvider>
+    </>
   )
 }
 
