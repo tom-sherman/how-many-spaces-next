@@ -24,7 +24,7 @@ export const NEXT_SEO_DEFAULT: NextSeoProps = {
   },
   twitter: {
     handle: '@Andrew_Haine',
-    cardType: 'summary',
+    cardType: 'summary_large_image',
   },
   titleTemplate: "%s | How Many Spaces?"
 };
