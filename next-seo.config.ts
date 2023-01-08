@@ -12,7 +12,7 @@ export const NEXT_SEO_DEFAULT: NextSeoProps = {
     description: 'See in real time how many parking spaces are available in the car parks and park and ride sites around Norwich, Norfolk.',
     images: [
       {
-        url: '/share.png',
+        url: `${process.env.NEXT_PUBLIC_URL}/share.png`,
         width: 1200,
         height: 630,
         alt: 'How Many Spaces? | Norwich',
