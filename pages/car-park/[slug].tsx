@@ -111,32 +111,36 @@ export default function CarParkPage(props: CarParkPageProps) {
                   <h2><FontAwesomeIcon icon={faParking} /> How many spaces are there in {detailQuery.data?.data.name} car park?</h2>
                   <p>There are { availabilityQuery.data?.data.totalSpaces } spaces, currently, <strong>{ availabilityQuery.data?.data.availableSpaces }</strong> are available.</p>
                 </ContentBlock>
-                <ContentBlock>
-                  <h2><FontAwesomeIcon icon={faClock} /> When is {detailQuery.data?.data.name} car park open?</h2>
-                  {
+                {
                     detailQuery.data?.data.openingHours?.table?.length ? (
-                      <Table
-                        data={detailQuery.data.data.openingHours.table}
-                        leftNote={detailQuery.data.data.openingHours.note}
-                        rightNote={detailQuery.data.data.openingHours.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.openingHours.lastUpdated), 'dd/MM/yy')}` : null}
-                      />
+                      <ContentBlock>
+                        <h2><FontAwesomeIcon icon={faClock} /> When is {detailQuery.data?.data.name} car park open?</h2>
+                        {
+                          detailQuery.data?.data.openingHours?.table?.length ? (
+                            <Table
+                              data={detailQuery.data.data.openingHours.table}
+                              leftNote={detailQuery.data.data.openingHours.note}
+                              rightNote={detailQuery.data.data.openingHours.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.openingHours.lastUpdated), 'dd/MM/yy')}` : null}
+                            />
+                          ) : null
+                        }
+                      </ContentBlock>
                     ) : null
+                }
+                <ContentBlock>
+                  {
+                    detailQuery.data?.data.category && detailQuery.data?.data.category !== CarParkCategories.PARK_AND_RIDE ? (
+                      <>
+                        <h2><FontAwesomeIcon icon={faTicket} /> How much does it cost to park at {detailQuery.data?.data.name}?</h2>
+                        <Table
+                          data={detailQuery.data.data.prices.table}
+                          leftNote={detailQuery.data.data.prices.note}
+                          rightNote={detailQuery.data.data.prices.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.prices.lastUpdated), 'dd/MM/yy')}` : null}
+                        />
+                      </>
+                      ) : null
                   }
-                </ContentBlock>
-                  <ContentBlock>
-                    {
-                      detailQuery.data?.data.category && detailQuery.data?.data.category !== CarParkCategories.PARK_AND_RIDE ? (
-                        <>
-                          <h2><FontAwesomeIcon icon={faTicket} /> How much does it cost to park at {detailQuery.data?.data.name}?</h2>
-                          <Table
-                            data={detailQuery.data.data.prices.table}
-                            leftNote={detailQuery.data.data.prices.note}
-                            rightNote={detailQuery.data.data.prices.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.prices.lastUpdated), 'dd/MM/yy')}` : null}
-                          />
-                        </>
-                        ) : null
-                    }
-                    </ContentBlock>
+                  </ContentBlock>
               </Content>
             </Article>
             <Sidebar>
