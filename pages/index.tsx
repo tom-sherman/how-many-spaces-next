@@ -76,7 +76,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<CarParkCategories>(CarParkCategories.CAR_PARK);
   const [selectedSort, setSelectedSort] = useState<CarParkSortParameters>(CarParkSortParameters.SPACES_DESC);
 
-  const canonicalUrl = useCanonicalUrl();
+  const canonicalUrl = process.env.NEXT_PUBLIC_URL;
 
   useResetGlobalElements();
 
