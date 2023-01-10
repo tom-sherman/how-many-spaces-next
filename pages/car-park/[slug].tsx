@@ -206,7 +206,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const carParks = await getCarParkAvailabilitiesList(LOCATION, CarParkCategories.CAR_PARK, CarParkSortParameters.SPACES_DESC);
+  const carParks = await getCarParkAvailabilitiesList(LOCATION, CarParkCategories.ALL, CarParkSortParameters.SPACES_DESC);
 
   const paths = carParks.data.map((carPark: CarParkAvailability) => {
     return { params: { slug: carPark.slug } }
