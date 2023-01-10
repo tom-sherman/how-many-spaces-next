@@ -17,6 +17,9 @@ export default function useTimeAgo(dateString: string): string {
     const [timeAgo, setTimeAgo] = useState(currentTimeAgo);
 
     useEffect(() => {
+        const currentTimeAgo = calculateTimeAgo(new Date(dateString));
+        setTimeAgo(currentTimeAgo);
+
         let interval = setInterval(() => {
             const currentTimeAgo = calculateTimeAgo(new Date(dateString));
             setTimeAgo(currentTimeAgo);
