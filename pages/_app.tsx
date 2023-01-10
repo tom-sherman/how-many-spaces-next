@@ -11,12 +11,16 @@ import { DefaultSeo } from 'next-seo';
 import { NEXT_SEO_DEFAULT } from 'next-seo.config';
 import * as Fathom from 'fathom-client';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING_ENABLED === 'true') {
   require('../mocks');
 }
 
+const ADSENSE_CLIENT_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+
 config.autoAddCss = false;
+
 
 const PageContainer = styled.div`
     display: flex;
@@ -55,6 +59,16 @@ function MyApp({ Component, pageProps }: AppProps) {
           <GlobalStyle />
           <PageContainer>
               <DefaultSeo {...NEXT_SEO_DEFAULT} />
+              {
+                ADSENSE_CLIENT_ID ? (
+                  <Script
+                    id="Adsense-id"
+                    crossOrigin='anonymous'
+                    strategy='afterInteractive'
+                    src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+                  />
+                ) : null
+              }
               <Component {...pageProps} />
             <Footer />
           </PageContainer>
