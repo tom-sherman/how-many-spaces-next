@@ -9,7 +9,7 @@ import { CarParkCategories, CarParkLocations, CarParkSortParameters } from '@/ty
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import useCanonicalUrl from 'hooks/useCanonicalUrl';
 import useResetGlobalElements from 'hooks/useResetGlobalElements';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -122,7 +122,7 @@ export default function Home() {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(
@@ -130,14 +130,10 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     () => getCarParkAvailabilitiesList(LOCATION, CarParkCategories.CAR_PARK, CarParkSortParameters.SPACES_DESC)
   );
 
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=300, state-while-revalidate=3600'
-  );
-
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
+    revalidate: 60,
   }
 }

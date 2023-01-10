@@ -27,6 +27,7 @@ export type CarParkAvailability = {
     id: string,
     name: string,
     url: string,
+    slug: string,
     status: CarParkStatuses,
     category: CarParkCategories,
     distanceFromCityCentre: number,

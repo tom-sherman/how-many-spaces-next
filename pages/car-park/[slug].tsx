@@ -1,15 +1,15 @@
 import { Columns, SiteWidth, PageBody } from '@/styles/layout';
 import Header from '@/components/Core/Header/Header'
-import { GetServerSideProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import { getCarParkAvailability, getCarParkDetail } from '@/actions/car-parks';
+import { getCarParkAvailabilitiesList, getCarParkAvailability, getCarParkDetail } from '@/actions/car-parks';
 import styled from 'styled-components';
 import BreakpointValues from '@/styles/breakpoints';
 import AvailabilityBar from '@/components/CarParks/Elements/AvailabilityBar';
 import { Content, ContentBlock } from '@/styles/components/Content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faGlobe, faLocationDot, faParking, faTicket, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { CarParkCategories } from '@/types/CarParks';
+import { CarParkAvailability, CarParkCategories, CarParkLocations, CarParkSortParameters } from '@/types/CarParks';
 import Table from '@/components/Content/Table';
 import ButtonStyles from "@/styles/components/Utilities/Button";
 import { format } from 'date-fns';
@@ -17,6 +17,8 @@ import useCanonicalUrl from 'hooks/useCanonicalUrl';
 import { NextSeo } from 'next-seo';
 import useResetGlobalElements from 'hooks/useResetGlobalElements';
 import Link from 'next/link';
+
+const LOCATION = CarParkLocations.NORWICH;
 
 const Article = styled.div`
   grid-column: 1 / 13;
@@ -177,7 +179,7 @@ export default function CarParkPage(props: CarParkPageProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params, res }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const queryClient = new QueryClient();
 
   try {
@@ -188,21 +190,30 @@ export const getServerSideProps: GetServerSideProps = async ({ params, res }) =>
 
     queryClient.setQueryData(['car-park-detail', params?.slug], detailResponse);
     queryClient.setQueryData(['car-park-availability', params?.slug], availabilityResponse);
-
-    res.setHeader(
-      'Cache-Control',
-      'public, s-maxage=300, state-while-revalidate=3600'
-    );
   
     return {
       props: {
         slug: String(params?.slug),
         dehydratedState: dehydrate(queryClient),
       },
+      revalidate: 60,
     }
   } catch (e) {
     return {
       notFound: true
     }
+  }
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const carParks = await getCarParkAvailabilitiesList(LOCATION, CarParkCategories.CAR_PARK, CarParkSortParameters.SPACES_DESC);
+
+  const paths = carParks.data.map((carPark: CarParkAvailability) => {
+    return { params: { slug: carPark.slug } }
+  });
+
+  return {
+    paths,
+    fallback: false,
   }
 }
