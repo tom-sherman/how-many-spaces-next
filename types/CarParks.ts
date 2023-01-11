@@ -23,11 +23,19 @@ export enum CarParkSortParameters {
     TRAIN_STATION_DISTANCE_ASC = "TRAIN_STATION_DISTANCE_ASC",
 }
 
+export type CarParkLocation = {
+    id: string,
+    name: string,
+    slug: string,
+    url: string,
+}
+
 export type CarParkAvailability = {
     id: string,
     name: string,
     url: string,
     slug: string,
+    location: CarParkLocation,
     status: CarParkStatuses,
     category: CarParkCategories,
     distanceFromCityCentre: number,
@@ -60,6 +68,8 @@ export type CarParkDetail = {
     id: string,
     name: string,
     url: string,
+    slug: string,
+    location: CarParkLocation,
     status: CarParkStatuses,
     introduction: string,
     coordinates?: Coordinates,

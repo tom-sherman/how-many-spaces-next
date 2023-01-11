@@ -2,7 +2,7 @@ import { Columns, SiteWidth, PageBody } from '@/styles/layout';
 import Header from '@/components/Core/Header/Header'
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import { getCarParkAvailabilitiesList, getCarParkAvailability, getCarParkDetail } from '@/actions/car-parks';
+import { getCarParkAvailabilitiesList, getCarParkAvailability, getCarParkDetail, getCarParkLocations } from '@/actions/car-parks';
 import styled from 'styled-components';
 import BreakpointValues from '@/styles/breakpoints';
 import AvailabilityBar from '@/components/CarParks/Elements/AvailabilityBar';
@@ -66,7 +66,8 @@ const DirectionsButton = styled.a`
 `
 
 type CarParkPageProps = {
-  slug: string
+  slug: string,
+  location: string,
 }
 
 export default function CarParkPage(props: CarParkPageProps) {
@@ -75,14 +76,14 @@ export default function CarParkPage(props: CarParkPageProps) {
   const canonicalUrl = useCanonicalUrl();
 
   const detailQuery = useQuery({
-    queryKey: ['car-park-detail', props.slug],
+    queryKey: ['car-park-detail', props.location, props.slug],
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     queryFn: () => getCarParkDetail(props.slug),
   });
 
   const availabilityQuery = useQuery({
-    queryKey: ['car-park-availability', props.slug],
+    queryKey: ['car-park-availability', props.location, props.slug],
     keepPreviousData: true,
     refetchOnWindowFocus: false,
     refetchInterval: 60000,
@@ -99,7 +100,7 @@ export default function CarParkPage(props: CarParkPageProps) {
       <Header
         h1={detailQuery.data?.data.name}
         leftContent={<p>{ detailQuery.data?.data.introduction }</p>}
-        breadcrumb={<Link href="/"><FontAwesomeIcon icon={faArrowLeft} /> Back to all car parks</Link>}
+        breadcrumb={<Link href={detailQuery.data?.data.location.url || '/'}><FontAwesomeIcon icon={faArrowLeft} /> Back to all car parks</Link>}
       />
       <PageBody>
         <SiteWidth>
@@ -182,18 +183,32 @@ export default function CarParkPage(props: CarParkPageProps) {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const queryClient = new QueryClient();
 
+  const location = params?.location;
+  const slug = params?.slug;
+
+  const notFound = [location, slug].some((item: any) => {
+    return !item || Array.isArray(item);
+  });
+
+  if (notFound) {
+    return {
+      notFound: true
+    }
+  }
+
   try {
     const [detailResponse, availabilityResponse] = await Promise.all([
-      getCarParkDetail(String(params?.slug)),
-      getCarParkAvailability(String(params?.slug)),
+      getCarParkDetail(String(slug)),
+      getCarParkAvailability(String(slug)),
     ]);
 
-    queryClient.setQueryData(['car-park-detail', params?.slug], detailResponse);
-    queryClient.setQueryData(['car-park-availability', params?.slug], availabilityResponse);
+    queryClient.setQueryData(['car-park-detail', location, slug], detailResponse);
+    queryClient.setQueryData(['car-park-availability', location, slug], availabilityResponse);
   
     return {
       props: {
-        slug: String(params?.slug),
+        location,
+        slug,
         dehydratedState: dehydrate(queryClient),
       },
       revalidate: 60,
@@ -206,11 +221,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const carParks = await getCarParkAvailabilitiesList(LOCATION, CarParkCategories.ALL, CarParkSortParameters.SPACES_DESC);
 
-  const paths = carParks.data.map((carPark: CarParkAvailability) => {
-    return { params: { slug: carPark.slug } }
-  });
+  const locations = await getCarParkLocations();
+  const carParkRequests = locations
+    .data
+    .map(locationResponse => getCarParkAvailabilitiesList(locationResponse.slug, CarParkCategories.ALL, CarParkSortParameters.SPACES_DESC));
+
+  const allCarParks = await Promise.all(carParkRequests);
+
+  const paths = allCarParks.reduce((allCarParkPaths: any, response) => {
+    const carParkPaths = response.data.map(carPark => ({ params: { location: carPark.location.slug, slug: carPark.slug } }));
+    return [...allCarParkPaths, ...carParkPaths];
+  }, []);
 
   return {
     paths,
