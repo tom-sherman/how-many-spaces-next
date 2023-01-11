@@ -35,8 +35,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   // Track pageviews with Fathom analytics
   useEffect(() => {
-    Fathom.load('PFRSUKKW', {
-      includedDomains: ['norwich.howmanyspaces.com'],
+    Fathom.load('WEVZQKWO', {
+      includedDomains: ['howmanyspaces.com'],
     });
 
     function onRouteChangeComplete() {
