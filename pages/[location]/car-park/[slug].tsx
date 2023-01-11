@@ -232,7 +232,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = allCarParks.reduce((allCarParkPaths: any, response) => {
     const carParkPaths = response.data.map(carPark => ({ params: { location: carPark.location.slug, slug: carPark.slug } }));
     return [...allCarParkPaths, ...carParkPaths];
-  }, []);
+  }, []); 
 
   return {
     paths,
