@@ -97,7 +97,8 @@ export default function Footer() {
                         <p><strong>Disclaimer: </strong> This website contains affiliate links for products and services we use and recommend.</p>
                         <Copyright>
                             <>
-                                <span>&copy; {time.getFullYear()} How Many Spaces?</span>
+                                <span> &copy; 2022 - {time.getFullYear()} How Many Spaces?</span>
+                                <span>Built by <a href="https://andrewhaine.co.uk?utm_campaign=client&utm_source=howmanyspaces&utm_medium=footerlink" target="_blank" rel="noreferrer">Andrew Haine</a></span>
                             </>
                         </Copyright>
                     </Left>

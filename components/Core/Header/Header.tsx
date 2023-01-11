@@ -7,6 +7,7 @@ import { useAppContext } from "@/context/app";
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ButtonNavItem, Nav, NavItem } from "@/styles/components/Navigation";
+import Image from "next/image";
 
 const Outer = styled.div`
     position: relative;
@@ -135,6 +136,11 @@ const Logo = styled.figure`
     @media (min-width: ${breakpoints.dl}) {
         width: 380px;
     }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 `
 
 const LogoLocation = styled.span`
@@ -215,9 +221,11 @@ export default function Header(props: HeaderProps) {
                         <TopLeft>
                             <Logo>
                                 <Link href="/">
-                                    <img
+                                    <Image
                                         src='/branding/logo.svg'
                                         alt="How Many Spaces? logo"
+                                        width={380}
+                                        height={44}
                                     />
                                 </Link>
                             </Logo>
