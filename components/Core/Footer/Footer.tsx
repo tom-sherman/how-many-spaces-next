@@ -98,7 +98,7 @@ export default function Footer() {
                         <Copyright>
                             <>
                                 <span> &copy; 2022 - {time.getFullYear()} How Many Spaces?</span>
-                                <span>Built by <a href="https://andrewhaine.co.uk?utm_campaign=client&utm_source=howmanyspaces&utm_medium=footerlink" target="_blank" rel="noreferrer">Andrew Haine</a></span>
+                                <span>Built by <a href="https://andrewhaine.co.uk?utm_campaign=client&utm_source=howmanyspaces&utm_medium=footerlink" target="_blank" rel="noreferrer">Andrew&nbsp;Haine</a></span>
                             </>
                         </Copyright>
                     </Left>
