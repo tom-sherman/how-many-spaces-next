@@ -232,7 +232,7 @@ export default function Header(props: HeaderProps) {
                             <LogoLocation>Norwich</LogoLocation>
                         </TopLeft>
                         <TopRight>
-                            <OffCanvasTrigger onClick={() => context.setOffCanvasOpen(true)}>
+                            <OffCanvasTrigger onClick={() => context.setOffCanvasOpen(true)} aria-label="Open off-canvas menu">
                                 <FontAwesomeIcon icon={faBars} />
                             </OffCanvasTrigger>
                             <OffCanvas />
