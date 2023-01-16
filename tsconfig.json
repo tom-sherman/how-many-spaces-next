@@ -22,7 +22,10 @@
       "@/components/*": ["components/*"],
       "@/images/*": ["public/images/*"],
       "@/types/*": ["types/*"],
-    }
+    },
+    "types": [
+      "@types/styled-components-react-native"
+    ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types/*.d.ts"],
   "exclude": ["node_modules"]
