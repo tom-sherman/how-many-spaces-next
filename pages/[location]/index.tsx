@@ -89,7 +89,7 @@ export default function Location(props: LocationPageProps) {
     const listQuery = useQuery({
         queryKey: ['car-park-list', slug, selectedCategory, selectedSort],
         refetchInterval: 60000,
-        refetchOnWindowFocus: false,
+        refetchOnWindowFocus: true,
         keepPreviousData: true,
         queryFn: () => getCarParkAvailabilitiesList(slug, selectedCategory, selectedSort),
     });
@@ -98,7 +98,8 @@ export default function Location(props: LocationPageProps) {
     <>
         <NextSeo canonical={canonicalUrl} />
         <Header
-        leftContent={<p>See the live number of available car park spaces in a number of car parks and Park and Ride sites around Norwich. Spaces are refreshed every 5 minutes to show you the most up to date parking information.</p>}
+            h1={`Live car parking spaces in Norwich`}
+            leftContent={<p>See how many spaces are available in a number of car parks and park & ride sites around Norwich. Spaces are refreshed every 5 minutes to show you the most up to date parking information.</p>}
         />
         <PageBody>
             <HomepageBody>
