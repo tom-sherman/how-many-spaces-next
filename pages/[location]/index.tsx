@@ -82,7 +82,7 @@ export default function Location(props: LocationPageProps) {
     const [selectedCategory, setSelectedCategory] = useState<CarParkCategories>(CarParkCategories.CAR_PARK);
     const [selectedSort, setSelectedSort] = useState<CarParkSortParameters>(CarParkSortParameters.SPACES_DESC);
 
-    const canonicalUrl = process.env.NEXT_PUBLIC_URL;
+    const canonicalUrl = useCanonicalUrl();
 
     useResetGlobalElements();
 
