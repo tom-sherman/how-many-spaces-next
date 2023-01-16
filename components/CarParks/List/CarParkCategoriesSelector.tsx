@@ -104,7 +104,7 @@ export default function CarParkCategoriesSelector(props: CarParkCategoriesProps)
         <MobileDisplay>
             <label htmlFor="car_park_category_select">Show:</label>
             <Select
-                id="car_park_category_select"
+                instanceId="car_park_category_select"
                 aria-label="Show"
                 defaultValue={{ value: 'SPACES_DESC', label: 'Most spaces' }}
                 styles={{
