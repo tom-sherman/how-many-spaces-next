@@ -24,7 +24,7 @@
       "@/types/*": ["types/*"],
     },
     "types": [
-      "@types/styled-components-react-native"
+      "@types/styled-components"
     ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types/*.d.ts"],
