@@ -67,6 +67,7 @@ export default function CarParkSortSelector(props: CarParkSortSelectorProps) {
             <label htmlFor="car_park_sort_select">Sort by:</label>
             <Select
                 id="car_park_sort_select"
+                aria-label="Sort by"
                 defaultValue={{ value: 'SPACES_DESC', label: 'Most spaces' }}
                 styles={{
                     container: (baseStyles) => ({
