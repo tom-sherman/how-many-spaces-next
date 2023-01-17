@@ -54,7 +54,7 @@ export default function OffCanvas() {
 
     return (
         <OffCanvasContainer isOpen={context.offCanvasOpen}>
-            <OffCanvasClose onClick={() => { context.setOffCanvasOpen(false) }} aria-label="Close off-canvas menu">
+            <OffCanvasClose onClick={() => { context.setOffCanvasOpen(false) }}>
                 <FontAwesomeIcon icon={faClose} />
             </OffCanvasClose>
             <OffCanvasNav>
