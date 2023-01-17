@@ -1,5 +1,4 @@
 import { getCarParkAvailabilitiesList, getCarParkLocations } from '@/actions/car-parks';
-import AdUnit from '@/components/Adsense/AdUnit';
 import CarParkAvailabilitiesList from '@/components/CarParks/List/CarParkAvailabilitiesList';
 import ErrorBanner from '@/components/Core/Errors/ErrorBanner';
 import Header from '@/components/Core/Header/Header'
@@ -121,11 +120,6 @@ export default function Location(props: LocationPageProps) {
                     <h2>Sponsor this page</h2>
                     <p>Are you interested in placing an ad or logo on this page? <a href="mailto:howmanyspaces@andrewhaine.co.uk">Email us</a> to find out more.</p>
                     </Sponsor>
-                    <AdUnit
-                        format='fluid'
-                        layoutKey=''
-                        slot="7610642530"
-                    />
                 </SidebarOuter>
                 </Columns>
             </SiteWidth>
