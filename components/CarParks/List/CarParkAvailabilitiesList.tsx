@@ -5,6 +5,7 @@ import CarParkAvailability from '../CarParkAvailability';
 import { AvailabilitiesListResponse } from "@/types/API";
 import CarParkSortSelector from "./CarParkSortSelector";
 import BreakpointValues from "@/styles/breakpoints";
+import AdUnit from "@/components/Adsense/AdUnit";
 
 const Top = styled.div`
     display: flex;
@@ -54,7 +55,18 @@ export default function CarParkAvailabilitiesList(props: CarParkAvailabilitiesLi
             </Top>
             <List>
                 {
-                    data.data.map(carPark => <CarParkAvailability key={carPark.url} carPark={carPark} />)
+                    data.data.map((carPark, i) => (
+                        (i > 0 && i < 8 && i % 3 === 0) ? (
+                            <div key={carPark.id}>
+                                <CarParkAvailability carPark={carPark} />
+                                <AdUnit
+                                    format="fluid"
+                                    layoutKey="-fb+5w+4e-db+86"
+                                    slot="3623797076"
+                                />
+                            </div>
+                        ) : <CarParkAvailability key={carPark.id} carPark={carPark} />
+                    ))
                 }
             </List>
         </>
