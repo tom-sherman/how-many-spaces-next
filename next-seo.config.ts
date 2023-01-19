@@ -1,14 +1,14 @@
 import type { NextSeoProps } from 'next-seo';
 
 export const NEXT_SEO_DEFAULT: NextSeoProps = {
-  title: 'Live car parking information for Norwich',
+  title: 'Live car parking spaces for Norwich',
   description: 'See in real time how many parking spaces are available in the car parks and park and ride sites around Norwich, Norfolk.',
   canonical: process.env.NEXT_PUBLIC_URL,
   openGraph: {
     type: 'website',
     locale: 'en_GB',
     url: process.env.NEXT_PUBLIC_URL,
-    title: 'Live car parking information for Norwich',
+    title: 'Live car park spaces for Norwich',
     description: 'See in real time how many parking spaces are available in the car parks and park and ride sites around Norwich, Norfolk.',
     images: [
       {
