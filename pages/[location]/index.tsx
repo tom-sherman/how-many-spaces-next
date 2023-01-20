@@ -1,4 +1,4 @@
-import { getCarParkAvailabilitiesList, getCarParkLocations } from '@/actions/car-parks';
+import { getCarParkAvailabilitiesList, getCarParkLocation, getCarParkLocations } from '@/actions/car-parks';
 import CarParkAvailabilitiesList from '@/components/CarParks/List/CarParkAvailabilitiesList';
 import ErrorBanner from '@/components/Core/Errors/ErrorBanner';
 import Header from '@/components/Core/Header/Header'
@@ -26,10 +26,17 @@ const HomepageBody = styled.div`
   }
 `
 
+const Main = styled.div`
+    grid-column: 1 / 13;
+
+    @media (min-width: ${BreakpointValues.ds}) {
+        grid-column: 1 / 9;
+    }
+`
+
 const CarParkListOuter = styled.div`
   position: relative;
   background-color: white;
-  grid-column: 1 / 13;
   padding: 20px;
   min-height: 500px;
   margin-left: -20px;
@@ -42,25 +49,23 @@ const CarParkListOuter = styled.div`
     width: unset;
     margin-left: 0;
   }
-
-  @media (min-width: ${BreakpointValues.ds}) {
-      grid-column: 1 / 9;
-  }
 `
 
 const SidebarOuter = styled.div`
-  position: relative;
-  background-color: white;
   grid-column: 1 / 13;
-  padding: 20px;
-  border-radius: 15px;
-  min-height: 500px;
-  margin-bottom: 20px;
-  overflow: hidden;
 
   @media (min-width: ${BreakpointValues.ds}) {
       grid-column: 9 / 13;
   }
+`
+
+const Sidebar = styled.div`
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  overflow: hidden;
 `
 
 const Sponsor = styled.div`
@@ -72,11 +77,13 @@ const Sponsor = styled.div`
 
 type LocationPageProps = {
     slug: string,
+    location: CarParkLocation,
 }
 
 export default function Location(props: LocationPageProps) {
     const {
-        slug
+        slug,
+        location,
     } = props;
 
     const [selectedCategory, setSelectedCategory] = useState<CarParkCategories>(CarParkCategories.CAR_PARK);
@@ -110,35 +117,40 @@ export default function Location(props: LocationPageProps) {
     <>
         <NextSeo canonical={canonicalUrl} />
         <Header
-            h1={`Live car parking spaces in Norwich`}
-            leftContent={<p>See how many spaces are available in a number of car parks and park & ride sites around Norwich. Spaces are refreshed every 5 minutes to show you the most up to date parking information.</p>}
+            h1={`Live car parking spaces in ${location.name}`}
+            location={location}
+            leftContent={<p>See how many spaces are available in a number of car parks and park & ride sites around {location.name}. Spaces are refreshed every 5 minutes to show you the most up to date parking information.</p>}
         />
         <PageBody>
             <HomepageBody>
             <SiteWidth>
                 <Columns>
-                <CarParkListOuter>
-                    { listQuery.isLoading ? <LoadingOverlay message='Refreshing car park data' /> : null }
-                    {
-                    listQuery.isError ? (
-                        <ErrorBanner title='Unable to fetch car parks' message='Unfortunately we encountered an issue fetching the car parks in this city, please check back shortly. If the problem persists please use the **Report an issue** link to get in touch with us.' />
-                    ) : (
-                        listQuery.data ? (
-                            <CarParkAvailabilitiesList
-                                data={listQuery.data}
-                                onCategoryChange={handleCategoryChange}
-                                onSortChange={handleSortChange}
-                            />
-                        ) : null
-                    )
-                    }
-                </CarParkListOuter>
-                <SidebarOuter>
-                    <Sponsor>
-                    <h2>Sponsor this page</h2>
-                    <p>Are you interested in placing an ad or logo on this page? <a href="mailto:howmanyspaces@andrewhaine.co.uk">Email us</a> to find out more.</p>
-                    </Sponsor>
-                </SidebarOuter>
+                    <Main>
+                        <CarParkListOuter>
+                            { listQuery.isLoading ? <LoadingOverlay message='Refreshing car park data' /> : null }
+                            {
+                                listQuery.isError ? (
+                                    <ErrorBanner title='Unable to fetch car parks' message='Unfortunately we encountered an issue fetching the car parks in this city, please check back shortly. If the problem persists please use the **Report an issue** link to get in touch with us.' />
+                                ) : (
+                                    listQuery.data ? (
+                                        <CarParkAvailabilitiesList
+                                            data={listQuery.data}
+                                            onCategoryChange={handleCategoryChange}
+                                            onSortChange={handleSortChange}
+                                        />
+                                    ) : null
+                                )
+                            }
+                        </CarParkListOuter>
+                    </Main>
+                    <SidebarOuter>
+                        <Sidebar>
+                            <Sponsor>
+                                <h2>Sponsor this page</h2>
+                                <p>Are you interested in placing an ad or logo on this page? <a href="mailto:howmanyspaces@andrewhaine.co.uk">Email us</a> to find out more.</p>
+                            </Sponsor>
+                        </Sidebar>
+                    </SidebarOuter>
                 </Columns>
             </SiteWidth>
             </HomepageBody>
@@ -157,6 +169,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         }
     }
 
+    const location = await getCarParkLocation(slug);
+
+    if (!location.data) {
+        return {
+            notFound: true
+        }
+    }
+
     await queryClient.prefetchQuery(
         ['car-park-list', slug, CarParkCategories.CAR_PARK, CarParkSortParameters.SPACES_DESC],
         () => getCarParkAvailabilitiesList(slug, CarParkCategories.CAR_PARK, CarParkSortParameters.SPACES_DESC)
@@ -165,6 +185,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return {
         props: {
             slug: slug,
+            location: location.data,
             dehydratedState: dehydrate(queryClient),
         },
         revalidate: 60,

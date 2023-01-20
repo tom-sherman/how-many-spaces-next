@@ -9,7 +9,7 @@ import AvailabilityBar from '@/components/CarParks/Elements/AvailabilityBar';
 import { Content, ContentBlock } from '@/styles/components/Content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faGlobe, faLocationDot, faParking, faTicket, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { CarParkAvailability, CarParkCategories, CarParkLocations, CarParkSortParameters } from '@/types/CarParks';
+import { CarParkAvailability, CarParkCategories, CarParkDetail, CarParkLocations, CarParkSortParameters } from '@/types/CarParks';
 import Table from '@/components/Content/Table';
 import ButtonStyles from "@/styles/components/Utilities/Button";
 import { format } from 'date-fns';
@@ -67,40 +67,40 @@ const DirectionsButton = styled.a`
 
 type CarParkPageProps = {
   slug: string,
-  location: string,
+  locationSlug: string,
+  details: CarParkDetail,
 }
 
 export default function CarParkPage(props: CarParkPageProps) {
+  const {
+    slug,
+    locationSlug,
+    details,
+  } = props;
 
   useResetGlobalElements();
   const canonicalUrl = useCanonicalUrl();
 
-  const detailQuery = useQuery({
-    queryKey: ['car-park-detail', props.location, props.slug],
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    queryFn: () => getCarParkDetail(props.slug),
-  });
-
   const availabilityQuery = useQuery({
-    queryKey: ['car-park-availability', props.location, props.slug],
+    queryKey: ['car-park-availability', locationSlug, slug],
     keepPreviousData: true,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
     refetchInterval: 60000,
-    queryFn: () => getCarParkAvailability(props.slug),
+    queryFn: () => getCarParkAvailability(slug),
   })
 
   return (
     <>
       <NextSeo
         canonical={canonicalUrl}
-        title={`${ detailQuery.data?.data.name } car park`}
-        description={`See in real time how many parking spaces are available in ${ detailQuery.data?.data.name } car park in Norwich`}
+        title={`${ details.name } car park`}
+        description={`See in real time how many parking spaces are available in ${ details.name } car park in Norwich`}
       />
       <Header
-        h1={detailQuery.data?.data.name}
-        leftContent={<p>{ detailQuery.data?.data.introduction }</p>}
-        breadcrumb={<Link href={detailQuery.data?.data.location.url || '/'}><FontAwesomeIcon icon={faArrowLeft} /> Back to all car parks</Link>}
+        h1={details.name}
+        leftContent={<p>{ details.introduction }</p>}
+        breadcrumb={<Link href={details.location.url || '/'}><FontAwesomeIcon icon={faArrowLeft} /> Back to all car parks</Link>}
+        location={details.location}
       />
       <PageBody>
         <SiteWidth>
@@ -111,19 +111,19 @@ export default function CarParkPage(props: CarParkPageProps) {
               />
               <Content>
                 <ContentBlock>
-                  <h2><FontAwesomeIcon icon={faParking} /> How many spaces are there in {detailQuery.data?.data.name} car park?</h2>
+                  <h2><FontAwesomeIcon icon={faParking} /> How many spaces are there in {details.name} car park?</h2>
                   <p>There are { availabilityQuery.data?.data.totalSpaces } spaces, currently, <strong>{ availabilityQuery.data?.data.availableSpaces }</strong> are available.</p>
                 </ContentBlock>
                 {
-                    detailQuery.data?.data.openingHours?.table?.length ? (
+                    details.openingHours?.table?.length ? (
                       <ContentBlock>
-                        <h2><FontAwesomeIcon icon={faClock} /> When is {detailQuery.data?.data.name} car park open?</h2>
+                        <h2><FontAwesomeIcon icon={faClock} /> When is {details.name} car park open?</h2>
                         {
-                          detailQuery.data?.data.openingHours?.table?.length ? (
+                          details.openingHours?.table?.length ? (
                             <Table
-                              data={detailQuery.data.data.openingHours.table}
-                              leftNote={detailQuery.data.data.openingHours.note}
-                              rightNote={detailQuery.data.data.openingHours.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.openingHours.lastUpdated), 'dd/MM/yy')}` : null}
+                              data={details.openingHours.table}
+                              leftNote={details.openingHours.note}
+                              rightNote={details.openingHours.lastUpdated ? `Updated ${format(new Date(details.openingHours.lastUpdated), 'dd/MM/yy')}` : null}
                             />
                           ) : null
                         }
@@ -132,13 +132,13 @@ export default function CarParkPage(props: CarParkPageProps) {
                 }
                 <ContentBlock>
                   {
-                    detailQuery.data?.data.category && detailQuery.data?.data.category !== CarParkCategories.PARK_AND_RIDE ? (
+                    details.category && details.category !== CarParkCategories.PARK_AND_RIDE ? (
                       <>
-                        <h2><FontAwesomeIcon icon={faTicket} /> How much does it cost to park at {detailQuery.data?.data.name}?</h2>
+                        <h2><FontAwesomeIcon icon={faTicket} /> How much does it cost to park at {details.name}?</h2>
                         <Table
-                          data={detailQuery.data.data.prices.table}
-                          leftNote={detailQuery.data.data.prices.note}
-                          rightNote={detailQuery.data.data.prices.lastUpdated ? `Updated ${format(new Date(detailQuery.data.data.prices.lastUpdated), 'dd/MM/yy')}` : null}
+                          data={details.prices.table}
+                          leftNote={details.prices.note}
+                          rightNote={details.prices.lastUpdated ? `Updated ${format(new Date(details.prices.lastUpdated), 'dd/MM/yy')}` : null}
                         />
                       </>
                       ) : null
@@ -149,23 +149,23 @@ export default function CarParkPage(props: CarParkPageProps) {
             <Sidebar>
               <SidebarInner>
                 {
-                  detailQuery.data?.data.shortAddress ? (
+                  details.shortAddress ? (
                     <p>
-                      <FontAwesomeIcon icon={faLocationDot} /> { detailQuery.data?.data.shortAddress }
+                      <FontAwesomeIcon icon={faLocationDot} /> { details.shortAddress }
                     </p>
                   ) : null
                 }
                 {
-                  detailQuery.data?.data.websiteUrl ? (
+                  details.websiteUrl ? (
                     <p>
-                      <FontAwesomeIcon icon={faGlobe} /> <a href={detailQuery.data?.data.websiteUrl} target="_blank" rel="noreferrer">Website</a>
+                      <FontAwesomeIcon icon={faGlobe} /> <a href={details.websiteUrl} target="_blank" rel="noreferrer">Website</a>
                     </p>
                   ) : null
                 }
                 {
-                  detailQuery.data?.data.directionsUrl ? (
+                  details.directionsUrl ? (
                     <p>
-                      <DirectionsButton href={detailQuery.data?.data.directionsUrl} target="_blank" rel="noreferrer">
+                      <DirectionsButton href={details.directionsUrl} target="_blank" rel="noreferrer">
                         Get directions
                       </DirectionsButton>
                     </p>
@@ -183,10 +183,10 @@ export default function CarParkPage(props: CarParkPageProps) {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const queryClient = new QueryClient();
 
-  const location = params?.location;
+  const locationSlug = params?.location;
   const slug = params?.slug;
 
-  const notFound = [location, slug].some((item: any) => {
+  const notFound = [locationSlug, slug].some((item: any) => {
     return !item || Array.isArray(item);
   });
 
@@ -202,12 +202,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       getCarParkAvailability(String(slug)),
     ]);
 
-    queryClient.setQueryData(['car-park-detail', location, slug], detailResponse);
-    queryClient.setQueryData(['car-park-availability', location, slug], availabilityResponse);
+    queryClient.setQueryData(['car-park-availability', locationSlug, slug], availabilityResponse);
+
+    const details = detailResponse.data;
   
     return {
       props: {
-        location,
+        details,
+        locationSlug,
         slug,
         dehydratedState: dehydrate(queryClient),
       },

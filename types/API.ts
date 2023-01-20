@@ -29,6 +29,10 @@ export interface DetailResponse {
     data: CarParkDetail
 }
 
+export interface LocationResponse {
+    data: CarParkLocation,
+}
+
 export interface LocationsListResponse {
     data: CarParkLocation[],
 }

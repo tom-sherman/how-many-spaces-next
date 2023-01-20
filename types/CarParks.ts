@@ -28,6 +28,7 @@ export type CarParkLocation = {
     name: string,
     slug: string,
     url: string,
+    data_disclaimer: string | null,
 }
 
 export type CarParkAvailability = {

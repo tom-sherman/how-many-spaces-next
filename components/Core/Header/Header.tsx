@@ -8,6 +8,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ButtonNavItem, Nav, NavItem } from "@/styles/components/Navigation";
 import Image from "next/image";
+import { CarParkLocation } from "@/types/CarParks";
 
 const Outer = styled.div`
     position: relative;
@@ -202,6 +203,7 @@ type HeaderProps = {
     h1?: string,
     leftContent: React.ReactNode,
     breadcrumb?: React.ReactNode,
+    location?: CarParkLocation,
 }
 
 export default function Header(props: HeaderProps) {
@@ -209,6 +211,7 @@ export default function Header(props: HeaderProps) {
         h1,
         leftContent,
         breadcrumb,
+        location,
     } = props;
 
     const context = useAppContext();
@@ -220,7 +223,7 @@ export default function Header(props: HeaderProps) {
                     <Top>
                         <TopLeft>
                             <Logo>
-                                <Link href="/">
+                                <Link href={location?.url || '/'}>
                                     <Image
                                         src='/branding/logo.svg'
                                         alt="How Many Spaces? logo"
@@ -229,7 +232,9 @@ export default function Header(props: HeaderProps) {
                                     />
                                 </Link>
                             </Logo>
-                            <LogoLocation>Norwich</LogoLocation>
+                            {
+                                location ? <LogoLocation>{ location.name }</LogoLocation> : null
+                            }
                         </TopLeft>
                         <TopRight>
                             <OffCanvasTrigger onClick={() => context.setOffCanvasOpen(true)} aria-label="Open off-canvas menu">

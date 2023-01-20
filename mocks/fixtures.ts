@@ -1,5 +1,13 @@
 import { CategoryResponse } from "@/types/API";
-import { CarParkAvailability, CarParkCategories, CarParkDetail, CarParkStatuses } from "@/types/CarParks";
+import { CarParkAvailability, CarParkCategories, CarParkDetail, CarParkLocation, CarParkStatuses } from "@/types/CarParks";
+
+export const defaultLocation: CarParkLocation = {
+    "id": "2ebnX0OPXZB8JlR5AyVMP3OoaYbnpKwNlqgGQzD416je0Nk2x9dv7rEWJQ56xKy3",
+    "name": "Norwich",
+    "url": "/norwich",
+    "slug": "norwich",
+    "data_disclaimer": "Test"
+};
 
 export const defaultCarParks: CarParkAvailability[] = [
     {
@@ -7,7 +15,7 @@ export const defaultCarParks: CarParkAvailability[] = [
         name: 'St Andrews\'s Multi-Storey',
         url: 'http://localhost:3000/car-parks/st-andrews',
         slug: 'st-andrews',
-        location: { "id": "2ebnX0OPXZB8JlR5AyVMP3OoaYbnpKwNlqgGQzD416je0Nk2x9dv7rEWJQ56xKy3", "name": "Norwich", "url": "/norwich", "slug": "norwich" },
+        location: defaultLocation,
         status: CarParkStatuses.OPEN,
         category: CarParkCategories.CAR_PARK,
         distanceFromCityCentre: 3,
@@ -28,7 +36,7 @@ export const defaultCarParks: CarParkAvailability[] = [
         name: 'Thickthorn P&R',
         url: 'http://localhost:3000/car-parks/thickthorn',
         slug: 'thickthorn',
-        location: { "id": "2ebnX0OPXZB8JlR5AyVMP3OoaYbnpKwNlqgGQzD416je0Nk2x9dv7rEWJQ56xKy3", "name": "Norwich", "url": "/norwich", "slug": "norwich" },
+        location: defaultLocation,
         status: CarParkStatuses.OPEN,
         category: CarParkCategories.PARK_AND_RIDE,
         distanceFromCityCentre: 23,
@@ -49,7 +57,7 @@ export const defaultCarParks: CarParkAvailability[] = [
         name: 'The Forum',
         url: 'http://localhost:3000/car-parks/the-forum',
         slug: 'the-forum',
-        location: { "id": "2ebnX0OPXZB8JlR5AyVMP3OoaYbnpKwNlqgGQzD416je0Nk2x9dv7rEWJQ56xKy3", "name": "Norwich", "url": "/norwich", "slug": "norwich" },
+        location: defaultLocation,
         status: CarParkStatuses.OPEN,
         category: CarParkCategories.CAR_PARK,
         distanceFromCityCentre: 2,
@@ -70,7 +78,7 @@ export const defaultCarParks: CarParkAvailability[] = [
         name: 'John Lewis',
         url: 'http://localhost:3000/car-parks/john-lewis',
         slug: 'john-lewis',
-        location: { "id": "2ebnX0OPXZB8JlR5AyVMP3OoaYbnpKwNlqgGQzD416je0Nk2x9dv7rEWJQ56xKy3", "name": "Norwich", "url": "/norwich", "slug": "norwich" },
+        location: defaultLocation,
         status: CarParkStatuses.CLOSED,
         category: CarParkCategories.CAR_PARK,
         distanceFromCityCentre: 3,
@@ -91,7 +99,7 @@ export const defaultCarParks: CarParkAvailability[] = [
         name: 'Riverside',
         url: 'http://localhost:3000/car-parks/riverside',
         slug: 'riverside',
-        location: { "id": "2ebnX0OPXZB8JlR5AyVMP3OoaYbnpKwNlqgGQzD416je0Nk2x9dv7rEWJQ56xKy3", "name": "Norwich", "url": "/norwich", "slug": "norwich" },
+        location: defaultLocation,
         status: CarParkStatuses.CLOSED,
         category: CarParkCategories.CAR_PARK,
         distanceFromCityCentre: 5,
@@ -130,7 +138,7 @@ export const carParkDetail: CarParkDetail = {
         "url": "/car-park/st-andrews",
         "status": CarParkStatuses.OPEN,
         "slug": "st-andrews",
-        "location": { "id": "2ebnX0OPXZB8JlR5AyVMP3OoaYbnpKwNlqgGQzD416je0Nk2x9dv7rEWJQ56xKy3", "name": "Norwich", "url": "/norwich", "slug": "norwich" },
+        "location": defaultLocation,
         "introduction": "This is some test introduction text",
         "coordinates": { "latitude": 1.29338300, "longitude": 52.63118710 },
         "directionsUrl": "https://www.google.com/maps/place/St.+Andrews+Car+Park/@52.6311871,1.293383,15z/data=!4m5!3m4!1s0x0:0x2ab03b2b0fba2d57!8m2!3d52.6311561!4d1.2933844",

@@ -1,5 +1,5 @@
 import { CarParkCategories, CarParkSortParameters } from "@/types/CarParks";
-import { ErrorResponse, AvailabilityResponse, AvailabilitiesListResponse, DetailResponse, LocationsListResponse } from "@/types/API";
+import { ErrorResponse, AvailabilityResponse, AvailabilitiesListResponse, DetailResponse, LocationsListResponse, LocationResponse } from "@/types/API";
 import axios from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
@@ -42,5 +42,11 @@ export async function getCarParkDetail(
 // /api/v1/car-parks/locations
 export async function getCarParkLocations(): Promise<LocationsListResponse> {
     return axios.get(`${BASE_URL}/${LOCATIONS_ENDPOINT}`)
+        .then(response => response.data);
+}
+
+// /api/v1/car-parks/locations/{slug}
+export async function getCarParkLocation(slug: string): Promise<LocationResponse> {
+    return axios.get(`${BASE_URL}/${LOCATIONS_ENDPOINT}/${slug}`)
         .then(response => response.data);
 }
