@@ -158,7 +158,9 @@ export default function Location(props: LocationPageProps) {
                         {
                             location.data_disclaimer ? (
                                 <DataDisclaimer>
-                                    <ReactMarkdown children={location.data_disclaimer} />
+                                    <ReactMarkdown>
+                                        {location.data_disclaimer}
+                                    </ReactMarkdown>
                                 </DataDisclaimer>
                             ) : null
                         }
