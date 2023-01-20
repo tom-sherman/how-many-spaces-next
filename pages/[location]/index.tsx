@@ -94,6 +94,18 @@ export default function Location(props: LocationPageProps) {
         queryFn: () => getCarParkAvailabilitiesList(slug, selectedCategory, selectedSort),
     });
 
+    const handleCategoryChange = (value?: CarParkCategories) => {
+        if (value) {
+            setSelectedCategory(value);
+        }
+    }
+    
+    const handleSortChange = (value?: CarParkSortParameters) => {
+        if (value) {
+            setSelectedSort(value);
+        }
+    }
+
     return (
     <>
         <NextSeo canonical={canonicalUrl} />
@@ -111,7 +123,13 @@ export default function Location(props: LocationPageProps) {
                     listQuery.isError ? (
                         <ErrorBanner title='Unable to fetch car parks' message='Unfortunately we encountered an issue fetching the car parks in this city, please check back shortly. If the problem persists please use the **Report an issue** link to get in touch with us.' />
                     ) : (
-                        listQuery.data ? <CarParkAvailabilitiesList data={listQuery.data} onCategoryChange={setSelectedCategory} onSortChange={setSelectedSort} /> : null
+                        listQuery.data ? (
+                            <CarParkAvailabilitiesList
+                                data={listQuery.data}
+                                onCategoryChange={handleCategoryChange}
+                                onSortChange={handleSortChange}
+                            />
+                        ) : null
                     )
                     }
                 </CarParkListOuter>

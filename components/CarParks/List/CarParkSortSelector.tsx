@@ -25,7 +25,7 @@ const Container = styled.div`
 type CarParkSortSelectorProps = {
     sort: CarParkSortParameters,
     options: CarParkSortParameters[],
-    onSelect: (value: string|null) => void,
+    onSelect: (value?: CarParkSortParameters) => void,
 }
 
 type OptionType = { [value: string]: any }

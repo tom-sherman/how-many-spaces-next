@@ -9,7 +9,7 @@ type CarParkCategoriesProps = {
     category: CarParkCategories,
     categories: CategoryResponse[],
     visibleCategories: CarParkCategories[],
-    onSelect: (value: string|null) => void,
+    onSelect: (value?: CarParkCategories) => void,
 }
 
 const MobileDisplay = styled.button`
