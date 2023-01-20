@@ -12,6 +12,7 @@ import useResetGlobalElements from 'hooks/useResetGlobalElements';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import styled from 'styled-components';
 
 const HomepageBody = styled.div`
@@ -73,6 +74,18 @@ const Sponsor = styled.div`
   padding: 16px 20px;
   border-radius: 12px;
   margin-top: 2px;
+`
+
+const DataDisclaimer = styled.div`
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    width: 100%;
+    border: 2px solid var(--colour-grey--light);
+
+    p:last-child {
+        margin: 0;
+    }
 `
 
 type LocationPageProps = {
@@ -142,6 +155,13 @@ export default function Location(props: LocationPageProps) {
                                 )
                             }
                         </CarParkListOuter>
+                        {
+                            location.data_disclaimer ? (
+                                <DataDisclaimer>
+                                    <ReactMarkdown children={location.data_disclaimer} />
+                                </DataDisclaimer>
+                            ) : null
+                        }
                     </Main>
                     <SidebarOuter>
                         <Sidebar>
