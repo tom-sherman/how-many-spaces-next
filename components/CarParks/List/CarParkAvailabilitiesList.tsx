@@ -26,8 +26,8 @@ const List = styled.div`
 
 type CarParkAvailabilitiesListProps = {
     data: AvailabilitiesListResponse,
-    onCategoryChange: Function,
-    onSortChange: Function,
+    onCategoryChange: (value: string|null) => void,
+    onSortChange: (value: string|null) => void,
 }
 
 export default function CarParkAvailabilitiesList(props: CarParkAvailabilitiesListProps) {

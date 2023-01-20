@@ -6,9 +6,9 @@ type AppWrapperProps = {
 
 type AppState = {
     offCanvasOpen: boolean,
-    setOffCanvasOpen: Function,
+    setOffCanvasOpen: (value: boolean) => void,
     issueModalOpen: boolean,
-    setIssueModalOpen: Function,
+    setIssueModalOpen: (value: boolean) => void,
 }
 
 let state: AppState = {
